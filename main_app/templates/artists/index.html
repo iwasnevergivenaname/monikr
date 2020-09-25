@@ -1,0 +1,20 @@
+<!-- templates/artists/index.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>monikr</title>
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style.css">
+<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">-->
+  </head>
+  <body>
+    <h1>all artist available</h1>
+    <hr />
+  {% for artist in artists %}
+    <p>monikr: {{ artist.monikr }}</p>
+    <p>genre: {{ artist.genre }}</p>
+    <hr />
+  {% endfor %}
+    <footer>all rights reserved, 2020</footer>
+  </body>
+</html>

@@ -1,0 +1,7 @@
+/* after you are done with a branch, after it gets approved and merged, you have to delete feature/css
+bc you dont want to have oudated code in it. deleteing it and redoing the branch will. have your
+up to date code */
+
+h1 {
+    color: purple;
+}

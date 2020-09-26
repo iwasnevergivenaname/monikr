@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>delete your artist page</h1>
+
+  <p>are you sure you want to remove the monikr: {{ cat }}?</p>
+
+  <form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="i'm sure">
+  </form>
+{% endblock %}

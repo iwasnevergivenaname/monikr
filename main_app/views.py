@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from .models import Artist
+from django.contrib.auth.models import User
+
 # from .models import Piece
 
 class ArtistCreate(CreateView):
@@ -9,9 +11,15 @@ class ArtistCreate(CreateView):
   fields = '__all__'
   success_url = '/artist'
 
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.user = self.request.user
+    self.object.save()
+    return HttpResponseRedirect('/artist')
+
 class ArtistUpdate(UpdateView):
   model = Artist
-  fields = ['moniker', 'pronouns', 'medium', 'artist_statement', 'icon']
+  fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'icon']
 
   def form_valid(self, form):
     self.object = form.save(commit=False)
@@ -24,21 +32,29 @@ class ArtistDelete(DeleteView):
 
 # Create your views here.
 def index(request):
-	return render(request, 'index.html')
+  return render(request, 'index.html')
 
 
 def about(request):
-	return render(request, 'about.html')
+  return render(request, 'about.html')
 
 def artist_index(request):
-	artists = Artist.objects.all()
-	return render(request, 'artists/index.html', {'artists': artists})
+  artists = Artist.objects.all()
+  return render(request, 'artists/index.html', {'artists': artists})
 
-# should change to artist/:monikr for url
-def profile(request):
-	artist = Artist.objects.get(id=1)
-	# piece = Piece.objects.get(id=1)
-	return render(request, 'profile.html', {'artist': artist})
+# these are returning all artist for one user, will change later but i just wanted to get auth up and running
+def profile(request, username):
+    user = User.objects.get(username=username)
+    artists = Artist.objects.filter(user=user)
+    return render(request, 'profile.html', {'username': username, 'artists': artists})
+
+
+# # should change to artist/:monikr for url
+def page(request, int):
+  artist = Artist.objects.get(id=int)
+  # artist = Artist.objects.get(monikr=monikr)
+  # piece = Piece.objects.get(id=1)
+  return render(request, 'artists/page.html', {'artist': artist})
 
 #
 

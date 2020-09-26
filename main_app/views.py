@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Artist
+from .models import Piece
 
 
 # Create your views here.
@@ -11,12 +12,17 @@ def index(request):
 def about(request):
 	return render(request, 'about.html')
 
-
 def artist_index(request):
 	artists = Artist.objects.all()
 	return render(request, 'artists/index.html', {'artists': artists})
 
+# should change to artist/:monikr for url
+def profile(request):
+	artist = Artist.objects.get(id=1)
+	pieces = Piece.objects.get(id=5)
+	return render(request, 'profile.html', {'artist': artist, 'pieces': pieces})
 
+#
 
 
 

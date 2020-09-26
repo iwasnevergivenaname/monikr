@@ -1,7 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <h1>username</h1>
+    <h1>monikr</h1>
+    {{ artist.monikr }}
+    {{ artist.artist_statement }}
+    {{ artist.genre }}
+    {{ artist.pronouns }}
+    {{ artist.medium }}
+<hr/>
+    {{ pieces.title }}
+    {{ pieces.media }}
+    {{ pieces.description }}
+    {{ pieces.materials_used }}
+    {{ pieces.for_sale }}
+    {{ pieces.price }}
+    {{ pieces.tw }}
+    <hr/>
 
-    {% endfor %}
-{% endlock %}
+{#        {% artist.monikr %}#}
+
+{#    {% endfor %}#}
+{% endblock %}

@@ -1,8 +1,26 @@
 from django.shortcuts import render
-from django.http import HttpResponse
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.http import HttpResponseRedirect
 from .models import Artist
-from .models import Piece
+# from .models import Piece
 
+class ArtistCreate(CreateView):
+  model = Artist
+  fields = '__all__'
+  success_url = '/artist'
+
+class ArtistUpdate(UpdateView):
+  model = Artist
+  fields = ['moniker', 'pronouns', 'medium', 'artist_statement', 'icon']
+
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.save()
+    return HttpResponseRedirect('/artist/' + str(self.object.pk))
+
+class ArtistDelete(DeleteView):
+  model = Artist
+  success_url = '/artist'
 
 # Create your views here.
 def index(request):
@@ -19,8 +37,8 @@ def artist_index(request):
 # should change to artist/:monikr for url
 def profile(request):
 	artist = Artist.objects.get(id=1)
-	pieces = Piece.objects.get(id=5)
-	return render(request, 'profile.html', {'artist': artist, 'pieces': pieces})
+	# piece = Piece.objects.get(id=1)
+	return render(request, 'profile.html', {'artist': artist})
 
 #
 

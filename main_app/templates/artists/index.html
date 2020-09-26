@@ -11,6 +11,7 @@
     <h1>all artist available</h1>
     <hr />
   {% for artist in artists %}
+      {% csrf_token %}
     <p>monikr: {{ artist.monikr }}</p>
     <p>genre: {{ artist.genre }}</p>
     <hr />

@@ -19,7 +19,7 @@ class ArtistCreate(CreateView):
 
 class ArtistUpdate(UpdateView):
   model = Artist
-  fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'icon']
+  fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'icon', 'bg_color']
 
   def form_valid(self, form):
     self.object = form.save(commit=False)

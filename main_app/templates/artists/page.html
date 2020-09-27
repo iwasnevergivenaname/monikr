@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div style="background-color: {{ artist.bg_color }}">
     <h1>monikr</h1>
     <img src="{{ artist.icon }}" alt="" style="height:110px">
     {{ artist.monikr }}
@@ -8,6 +9,7 @@
     {{ artist.genre }}
     {{ artist.pronouns }}
     {{ artist.medium }}
+    <a href="update/">edit profile</a>
 <hr/>
 {#    {{ piece.title }}#}
 {#    {{ piece.media }}#}
@@ -17,6 +19,6 @@
 {#    {{ piece.price }}#}
 {#    {{ piece.tw }}#}
     <hr/>
-
+</div>
 
 {% endblock %}

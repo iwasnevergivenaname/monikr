@@ -11,6 +11,7 @@ class Artist(models.Model):
     medium = models.CharField(max_length=50)
     artist_statement = models.CharField(max_length=250)
     icon =  models.CharField(max_length=250, default='upload icon')
+    bg_color = models.CharField(max_length=50, default='white')
     # icon =
     # category =
     # location =

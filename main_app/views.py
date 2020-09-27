@@ -85,8 +85,8 @@ def page(request, pk):
   # piece = Piece.objects.get(id=1)
   return render(request, 'artists/page.html', {'artist': artist, 'exhibit': exhibit})
 
-def exhibit(request, id):
-  artist = Artist.objects.get(id=id)
-  exhibit = Exhibit.objects.get(id=id)
+def exhibit(request, pk):
+  artist = Artist.objects.get(pk=pk)
+  exhibit = Exhibit.objects.get(pk=pk)
   return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit})
 

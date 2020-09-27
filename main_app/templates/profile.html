@@ -1,23 +1,41 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
-    <h1>monikr</h1>
-    {{ artist.monikr }}
-    {{ artist.artist_statement }}
-    {{ artist.genre }}
-    {{ artist.pronouns }}
-    {{ artist.medium }}
-<hr/>
-    {{ pieces.title }}
-    {{ pieces.media }}
-    {{ pieces.description }}
-    {{ pieces.materials_used }}
-    {{ pieces.for_sale }}
-    {{ pieces.price }}
-    {{ pieces.tw }}
-    <hr/>
 
-{#        {% artist.monikr %}#}
+<h1>{{ username }}'s collection:</h1>
 
-{#    {% endfor %}#}
+{% for artist in artists %}
+<a href="/artist/{{ artist.id }}">
+  <h3>{{ artist.monikr }}</h3>
+</a>
+
+{% endfor %}
+
 {% endblock %}
+
+{##}
+{#{% extends 'base.html' %}#}
+{##}
+{#{% block content %}#}
+{#    <h1>monikr</h1>#}
+{#    <img src="{{ artist.icon }}" alt="" style="height:110px">#}
+{#    {{ artist.monikr }}#}
+{#    {{ artist.artist_statement }}#}
+{#    {{ artist.genre }}#}
+{#    {{ artist.pronouns }}#}
+{#    {{ artist.medium }}#}
+{#<hr/>#}
+{#    {{ piece.title }}#}
+{#    {{ piece.media }}#}
+{#    {{ piece.description }}#}
+{#    {{ piece.materials_used }}#}
+{#    {{ piece.for_sale }}#}
+{#    {{ piece.price }}#}
+{#    {{ piece.tw }}#}
+{#    <hr/>#}
+{##}
+{#        {% artist.monikr %}#}
+{##}
+{#    {% endfor %}#}
+{#{% endblock %}#}

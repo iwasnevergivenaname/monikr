@@ -1,21 +1,21 @@
-<!-- templates/artists/index.html -->
+
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>monikr</title>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}style.css">
-<!--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.css">-->
-  </head>
-  <body>
-    <h1>all artist available</h1>
+{% block content %}
+    <a href="/artist/create">add a new artist</a>
     <hr />
-  {% for artist in artists %}
-      {% csrf_token %}
-    <p>monikr: {{ artist.monikr }}</p>
-    <p>genre: {{ artist.genre }}</p>
-    <hr />
-  {% endfor %}
-    <footer>all rights reserved, 2020</footer>
-  </body>
-</html>
+    {% for artist in artists %}
+      <a href='/artist/{{artist.id}}'>
+        <p>Name: {{ artist.monikr }}</p>
+      </a>
+      <a href='/user/{{artist.user.username}}'>
+        <p>{{artist.user.username}}</p>
+      </a>
+{#        {% if cat.age > 0 %}#}
+{#          <p>Age: {{ cat.age }}</p>#}
+{#        {% else %}#}
+{#          <p>Age: Kitten</p>#}
+{#        {% endif %}#}
+        <hr />
+        {% endfor %}
+{% endblock %}

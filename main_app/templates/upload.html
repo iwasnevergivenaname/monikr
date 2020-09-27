@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load cloudinary %}
+{% load static %}
+
+{% block content %}
+     <!-- A standard form for sending the image data to your server -->
+  <div id='backend_upload'>
+    <h1>upload a photo</h1>
+    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ backend_form }}
+      <input type="submit" value="Upload">
+    </form>
+    {% if posted %}
+      <div class="results">
+        {% if posted.errors %}
+          Errors: {{ posted.errors }}
+        {% else %}
+          <div class="uploaded_info">
+            <div class="data">
+              <table>
+                {% for key, value in posted.image.metadata.items %}
+                  <tr><td>{{ key }}</td><td>{{ value }}</td></tr>
+                {% endfor %}
+              </table>
+            </div>
+            <div class="image">
+              {% cloudinary posted.image THUMBNAIL %}
+            </div>
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
+  </div>
+
+{% endblock %}

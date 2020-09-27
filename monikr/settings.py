@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'main_app',
+    'cloudinary',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -119,3 +120,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# cloudinary
+CLOUDINARY = {
+  'cloud_name': 'dvviaroqm',
+  'api_key': '815426668381665',
+  'api_secret': '3stI4LUzbwUr9BMiEnmAnYMRpAU',
+}

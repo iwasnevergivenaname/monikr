@@ -1,21 +1,41 @@
 {% extends 'base.html' %}
+{% load cloudinary %}
 
 {% block content %}
     <div style="background-color: {{ artist.bg_color }}">
-    <h1>monikr</h1>
-    <img src="{{ artist.icon }}" alt="" style="height:110px"><br>
-    {{ artist.monikr }}<br>
-    {{ artist.artist_statement }}<br>
-    {{ artist.pronouns }}<br>
-    {{ artist.medium }}<br>
-    <a href="update/">edit profile</a>
-<hr/>
+        <h1>monikr</h1>
+        <img src="{{ artist.icon }}" alt="" style="height:110px"><br>
+        {#    cloudinary.utils.cloudinary_url("iKdy0bn_wm1mhp",#}
+        {#                                width = 90,#}
+        {#                                height = 90,#}
+        {#                                crop = "thumb",#}
+        {#                                gravity = "face")#}
+        {#    {% cloudinary image width=120 height=120 crop="fill" %}#}
+        {#    <img src="https://res.cloudinary.com/dvviaroqm/image/upload/v1601239146/iKdy0bn_wm1mhp.jpg" alt="icon" />#}
+
+        {{ artist.monikr }}<br>
+        {{ artist.artist_statement }}<br>
+        {{ artist.pronouns }}<br>
+        {{ artist.medium }}<br>
+        <a href="update/">edit profile</a><br>
+        <a href="../../exhibit/create/">upload a text post</a>
+        <a href="../../exhibit/upload/">upload a photo</a>
+        <hr/>
         {% for e in exhibit %}
             <a href="../../exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
-        {{ e.content }}<hr>
+            {{ e.content }}
+            <hr>
+
         {% endfor %}
 
-    <hr/>
-</div>
+        {% for p in photo %}
+            <a href="../../exhibit/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
+            <img src="{{ p.image.url }}" alt="uploaded image">
+
+
+        {% endfor %}
+
+        <hr/>
+    </div>
 
 {% endblock %}

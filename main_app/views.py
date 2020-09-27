@@ -78,15 +78,15 @@ def profile(request, username):
 
 
 # # should change to artist/:monikr for url
-def page(request, int):
-  artist = Artist.objects.get(id=int)
+def page(request, pk):
+  artist = Artist.objects.get(pk=pk)
   exhibit = Exhibit.objects.all()
   # artist = Artist.objects.get(monikr=monikr)
   # piece = Piece.objects.get(id=1)
   return render(request, 'artists/page.html', {'artist': artist, 'exhibit': exhibit})
 
-def exhibit(request, int):
-  artist = Artist.objects.get(id=int)
-  exhibit = Exhibit.objects.get(id=int)
+def exhibit(request, id):
+  artist = Artist.objects.get(id=id)
+  exhibit = Exhibit.objects.get(id=id)
   return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit})
 

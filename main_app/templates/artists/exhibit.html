@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>{{ exhibit.title }}</h2>
+<p>{{ exhibit.content }}</p>
+<h6>materials used: {{ exhibit.materials_used }}</h6><br>
+
+<a href="update/">edit exhibit</a>
+{% endblock %}

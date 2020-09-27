@@ -52,4 +52,12 @@ class Commision(models.Model):
     # artist_id
     isOpened = models.BooleanField(default=False)
     dislcaimer = models.CharField(max_length=250, default=None)
+    
+
+class Exhibit(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default='title')
+    content = models.CharField(max_length=100, default='write it out here')
+    materials_used = models.CharField(max_length=100, default='materials')
+    for_sale = models.BooleanField(blank=False)
 

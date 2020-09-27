@@ -1,10 +1,9 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>about monikr</title>
-    </head>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
     <body>
-        <h1>monikr</h1>
+        <a href="/"><h1>monikr</h1></a>
         <hr />
         <p>we reserve the right to remove anything we find offensive without a subjectively good enough reason<br>
             because we believe that art shouldn’t be limited for the most part, content on this app may be explicit.
@@ -34,4 +33,6 @@
             we reserve the right to remove anything we find offensive without a subjectively good enough reason</p>
         <footer>all rights reserved, 2020</footer>
     </body>
-</html>
+    
+
+{% endblock %}

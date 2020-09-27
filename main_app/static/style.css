@@ -2,6 +2,10 @@
 bc you dont want to have oudated code in it. deleteing it and redoing the branch will. have your
 up to date code */
 
+* {
+    text-align: center;
+}
+
 h1 {
     color: purple;
 }

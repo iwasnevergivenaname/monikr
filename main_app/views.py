@@ -90,13 +90,3 @@ def exhibit(request, int):
   exhibit = Exhibit.objects.get(id=int)
   return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit})
 
-#
-
-
-
-# artists = [
-# 	Artist('sleepy icarus', 'comfort in loneliness', 'vaporwave', 'she/her', 'digital photography'),
-# 	Artist('kathryn mace-shanahan', 'quilting isn\'t boring', 'experimental', 'she/her', 'quilts'),
-# 	Artist('tima', 'cute things', '90\'s kid', 'she/her', 'laser cutting'),
-# 	Artist('tiza', 'i\'m a cool chick', 'lite goth', 'she/her', 'bending'),
-# ]

@@ -4,12 +4,43 @@
   <head>
     <title>monikr</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
   </head>
   <body>
-    <h1>welcome to monikr</h1>
-    <hr />
-    <a href="/artist">view artists</a>
-    <footer>all rights reserved Monikr, 2020</footer>
+    <nav>
+      <div class="nav-wrapper">
+        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+          <li><a href="badges.html"><i class="material-icons">view_module</i></a></li>
+          <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+          <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+        </ul>
+      </div>
+    </nav>
+    <div class="homepage">
+      <h1>welcome to monikr</h1>
+      <hr />
+      <a href="/artist">view artists</a>
+      <!-- <footer>all rights reserved Monikr, 2020</footer> -->
+      <footer class="page-footer">
+        <div class="container">
+          <div class="row">
+            <div class="col l4 offset-l2 s12">
+              <ul>
+                <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="footer-copyright">
+          <div class="container">
+          All rights reserved Monikr 😘, 2020
+          </div>
+        </div>
+      </footer>
+    </div>
   </body>
 </html>
-# testing something out testing testing 

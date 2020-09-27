@@ -2,10 +2,30 @@
 bc you dont want to have oudated code in it. deleteing it and redoing the branch will. have your
 up to date code */
 
-* {
+/* * {
+    text-align: center;
+} */
+h1{
+    text-align: center;
+    color: purple;
+}
+
+a:hover{
+    color: pink;
+}
+
+.about-title{
+    color: purple;
+    font-size: 60px;
+}
+
+.base-footer, 
+.homepage,
+.about-body {
     text-align: center;
 }
 
-h1 {
-    color: purple;
+.about {
+    text-align: justify;
+    padding: 0 80px 0 80px;
 }

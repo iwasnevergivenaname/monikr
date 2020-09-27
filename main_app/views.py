@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from .models import Artist
+from .models import Exhibit
 from django.contrib.auth.models import User
 
 # from .models import Piece
@@ -29,6 +30,33 @@ class ArtistUpdate(UpdateView):
 class ArtistDelete(DeleteView):
   model = Artist
   success_url = '/artist'
+  
+  
+#   FIX SUCCESS URL
+class ExhibitCreate(CreateView):
+  model = Exhibit
+  fields = '__all__'
+  success_url = '/exhibit'
+
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.user = self.request.user
+    self.object.save()
+    return HttpResponseRedirect('/exhibit')
+
+class ExhibitUpdate(UpdateView):
+  model = Exhibit
+  fields = ['title', 'content', 'materials_used', 'for_sale']
+  
+  def form_valid(self, form):
+    self.object = form.save(commit=False)
+    self.object.save()
+    return HttpResponseRedirect('/exhibit/' + str(self.object.pk))
+  
+class ExhibitDelete(DeleteView):
+  model = Exhibit
+  success_url = '/exhibit'
+
 
 # Create your views here.
 def index(request):
@@ -52,9 +80,15 @@ def profile(request, username):
 # # should change to artist/:monikr for url
 def page(request, int):
   artist = Artist.objects.get(id=int)
+  exhibit = Exhibit.objects.all()
   # artist = Artist.objects.get(monikr=monikr)
   # piece = Piece.objects.get(id=1)
-  return render(request, 'artists/page.html', {'artist': artist})
+  return render(request, 'artists/page.html', {'artist': artist, 'exhibit': exhibit})
+
+def exhibit(request, int):
+  artist = Artist.objects.get(id=int)
+  exhibit = Exhibit.objects.get(id=int)
+  return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit})
 
 #
 

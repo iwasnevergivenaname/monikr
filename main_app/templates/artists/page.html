@@ -3,14 +3,17 @@
 {% block content %}
     <div style="background-color: {{ artist.bg_color }}">
     <h1>monikr</h1>
-    <img src="{{ artist.icon }}" alt="" style="height:110px">
-    {{ artist.monikr }}
-    {{ artist.artist_statement }}
-    {{ artist.genre }}
-    {{ artist.pronouns }}
-    {{ artist.medium }}
+    <img src="{{ artist.icon }}" alt="" style="height:110px"><br>
+    {{ artist.monikr }}<br>
+    {{ artist.artist_statement }}<br>
+    {{ artist.pronouns }}<br>
+    {{ artist.medium }}<br>
     <a href="update/">edit profile</a>
 <hr/>
+        {% for e in exhibit %}
+            <a href="../../exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
+        {{ e.content }}<hr>
+        {% endfor %}
 {#    {{ piece.title }}#}
 {#    {{ piece.media }}#}
 {#    {{ piece.description }}#}

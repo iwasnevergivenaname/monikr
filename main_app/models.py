@@ -27,7 +27,7 @@ class Artist(models.Model):
 
     
 class Contact(models.Model):
-    user = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     # email = User.email
     phone = models.IntegerField(default=None)
     website = models.CharField(max_length=50, default=None)
@@ -40,13 +40,13 @@ class Contact(models.Model):
     
     
 class Commision(models.Model):
-    user = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     isOpened = models.BooleanField(default=False)
     dislcaimer = models.CharField(max_length=250, default=None)
     
 
 class Exhibit(models.Model):
-    user = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default='title')
     content = models.CharField(max_length=100, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
@@ -54,7 +54,7 @@ class Exhibit(models.Model):
 
 
 class Photo(models.Model):
-    user = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     ## Misc Django Fields
     create_time = models.DateTimeField(auto_now_add=True)
     title = models.CharField("Title (optional)", max_length=200, blank=True)

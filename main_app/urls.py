@@ -14,7 +14,8 @@ urlpatterns = [
     path('exhibit/create/', views.ExhibitCreate.as_view(), name='exhibit_create'),
     path('exhibit/<int:pk>/update/', views.ExhibitUpdate.as_view(), name='exhibit_update'),
     path('exhibit/<int:pk>/delete/', views.ExhibitDelete.as_view(), name='exhibit_delete'),
-    path('exhibit/upload/', views.upload, name='upload')
+    path('exhibit/upload/', views.upload, name='upload'),
+    path('photo/<int:pk>/', views.photo, name='photo'),
 ]
 
 #  profile url should be artist/:moniker

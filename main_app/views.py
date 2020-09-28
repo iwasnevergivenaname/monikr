@@ -105,8 +105,14 @@ def page(request, pk):
 def exhibit(request, pk):
 	artist = Artist.objects.get(pk=pk)
 	exhibit = Exhibit.objects.get(pk=pk)
+	# photo = Photo.objects.get(pk=pk)
+	return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit})
+
+
+def photo(request, pk):
+	# artist = Artist.objects.get(pk=pk)
 	photo = Photo.objects.get(pk=pk)
-	return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit, 'photo': photo})
+	return render(request, 'artists/exhibit.html', {'photo': photo})
 
 
 def upload(request):

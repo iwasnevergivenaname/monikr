@@ -7,7 +7,9 @@
 <h6>materials used: {{ exhibit.materials_used }}</h6><br>
     {%  elif photo %}
     <h2>{{ photo.title }}</h2>
-<img src="{{ p.image.url }}" alt="uploaded image">
+<img src="{{ photo.image.url }}" alt="uploaded image">
+        <p>photo user id : {{ photo.user_id }}</p>
+        <p>photo pk : {{ photo.pk }}</p>
     {% endif %}
 
 <a href="update/">edit exhibit</a>

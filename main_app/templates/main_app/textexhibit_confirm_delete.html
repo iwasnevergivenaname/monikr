@@ -1,9 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h1>delete your exhibit page</h1>
+  <h1>delete your text exhibit page</h1>
 
-  <p>are you sure you want to remove the exhibit: {{ exhibit.title }}?</p>
+  <p>are you sure you want to remove the exhibit: {{ text_exhibit.title }}?</p>
 
   <form action="" method="POST">
     {% csrf_token %}

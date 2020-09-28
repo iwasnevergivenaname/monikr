@@ -170,7 +170,6 @@ def upload(request):
 		if form.is_valid():
 			# Uploads image and creates a model instance for it
 			form.save()
-	
 	return render(request, 'upload.html', context)
 
 

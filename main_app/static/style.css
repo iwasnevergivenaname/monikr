@@ -2,10 +2,12 @@
 bc you dont want to have oudated code in it. deleteing it and redoing the branch will. have your
 up to date code */
 
+
 h1{
     text-align: center;
     color: purple;
 }
+
 
 input:hover {
     color: rgb(238, 141, 173);
@@ -27,7 +29,7 @@ a:hover{
 
 .base-footer, 
 .homepage,
-.about-body {
+#about-body {
     text-align: center;
 }
 
@@ -37,13 +39,18 @@ a:hover{
 }
 
 footer{
-    margin-top: 10%;
+    position: fixed;
+    bottom: 0;
+    height: 130px;
+    width: 100%;
     background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
 }
 
 nav {
     background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
 }
+
+   
 
 
 

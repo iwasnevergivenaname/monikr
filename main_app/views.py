@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth.models import User
+from django.contrib import auth
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
@@ -73,10 +75,12 @@ class TextExhibitUpdate(UpdateView):
 class TextExhibitDelete(DeleteView):
 	model = TextExhibit
 	success_url = '/exhibit'
-	
+
+
 # SEARCH PAGE AND RESULTS
 class HomePageView(TemplateView):
 	template_name = 'search.html'
+
 
 class SearchResultsView(ListView):
 	model = Artist
@@ -101,8 +105,8 @@ class TagCreate(CreateView):
 		self.object.user = self.request.user
 		self.object.save()
 		return HttpResponseRedirect('/tags')
-	
-	
+
+
 class TagUpdate(UpdateView):
 	model = Tag
 	fields = ['tag']
@@ -127,6 +131,7 @@ def artist_index(request):
 	artists = Artist.objects.all()
 	return render(request, 'artists/index.html', {'artists': artists})
 
+
 # def search(TemplateView):
 # 	return render(request, 'search.html')
 
@@ -143,7 +148,8 @@ def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
-	return render(request, 'artists/page.html', {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit})
+	return render(request, 'artists/page.html',
+	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit})
 
 
 def text_exhibit(request, pk):
@@ -159,6 +165,7 @@ def photo_exhibit(request, pk):
 	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit})
 
 
+# UPLOAD
 def upload(request):
 	unsigned = request.GET.get("unsigned") == "true"
 	
@@ -205,6 +212,7 @@ def direct_upload_complete(request):
 	return HttpResponse(json.dumps(ret), content_type='application/json')
 
 
+#  TAGS
 def tags_index(request):
 	tags = Tag.objects.all()
 	return render(request, 'tags/index.html', {'tags': tags})
@@ -215,3 +223,38 @@ def tags_show(request, tag_id):
 	return render(request, 'tags/show.html', {'tag': tag})
 
 
+# AUTH
+def signup(request):
+	context = {"error": False}
+	if request.method == "GET":
+		return render(request, 'index.html', context)
+	if request.method == "POST":
+		username = request.POST["username"]
+		password = request.POST["password"]
+		try:
+			user = User.objects.create_user(username=username, password=password)
+			if user is not None:
+				# run the login method to automatically log in user
+				# as they sign up.
+				return login(request)
+		except:
+			context["error"] = f"Username '{username}' already exists."
+			return render(request, 'auth/login.html', context)
+
+
+def login(request):
+	context = {"error": False}
+	if request.method == "GET":
+		return render(request, 'auth/login.html')
+	if request.method == "POST":
+		username = request.POST["username"]
+		password = request.POST["password"]
+		user = auth.authenticate(username=username, password=password)
+		if user is not None:
+			auth.login(request, user)
+			return render(request, 'index.html')
+
+
+def logout(request):
+	auth.logout(request)
+	return render(request, 'index.html')

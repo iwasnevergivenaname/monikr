@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h1>Search Results</h1>
+
+<ul>
+  {% for artist in object_list %}
+    <li>
+      {{ artist.monikr }}, {{ artist.artist_statement }}
+    </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

@@ -1,46 +1,52 @@
 {% load static %}
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <title>monikr</title>
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-  </head>
-  <body>
-    <nav>
-      <div>
+</head>
+<body>
+<nav>
+    <div>
         <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
         <ul class="right hide-on-med-and-down">
-          <li><a href="sass.html"><i class="material-icons">search</i></a></li>
-          <li><a href="/"><i class="material-icons">home</i></a></li>
-          <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-          <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+            <li><a href="search.html"><i class="material-icons">search</i></a></li>
+            <li><a href="/"><i class="material-icons">home</i></a></li>
+            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
         </ul>
-      </div>
-    </nav>
-    <div class="homepage">
-      <h1>welcome to monikr</h1>
-      <hr />
-      <a href="/artist">view artists</a>
-      <!-- <footer>all rights reserved Monikr, 2020</footer> -->
-      <footer class="page-footer">
+    </div>
+</nav>
+<div class="homepage">
+    <h1>welcome to monikr</h1>
+    <form action="{% url 'search_results' %}" method="get">
+        <label for="q">
+            <input name="q" type="text" placeholder="looking for...">
+        </label>
+    </form>
+
+    <hr/>
+    <a href="/artist">view artists</a>
+    <!-- <footer>all rights reserved Monikr, 2020</footer> -->
+    <footer class="page-footer">
         <div class="container">
-          <div class="row">
-            <div class="col l4 offset-l2 s12">
-              <ul>
-                <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
-              </ul>
+            <div class="row">
+                <div class="col l4 offset-l2 s12">
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
+                    </ul>
+                </div>
             </div>
-          </div>
         </div>
         <div class="footer-copyright">
-          <div class="container">
-          All rights reserved Monikr 😘, 2020
-          </div>
+            <div class="container">
+                all rights reserved Monikr 😘, 2020
+            </div>
         </div>
-      </footer>
-    </div>
-  </body>
+    </footer>
+</div>
+</body>
 </html>

@@ -1,9 +1,12 @@
 from django.shortcuts import render
+from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
+from django.db.models import Q
 from .models import Artist
 from .models import Exhibit
 from .models import Photo
+
 from django.contrib.auth.models import User
 import json
 
@@ -71,6 +74,21 @@ class ExhibitUpdate(UpdateView):
 class ExhibitDelete(DeleteView):
 	model = Exhibit
 	success_url = '/exhibit'
+	
+# SEARCH PAGE AND RESULTS
+class HomePageView(TemplateView):
+	template_name = 'search.html'
+
+class SearchResultsView(ListView):
+	model = Artist
+	template_name = 'search_results.html'
+	
+	def get_queryset(self):
+		query = self.request.GET.get('q')
+		object_list = Artist.objects.filter(
+			Q(monikr__icontains=query) | Q(artist_statement__icontains=query)
+		)
+		return object_list
 
 
 # Create your views here.
@@ -86,6 +104,9 @@ def artist_index(request):
 	artists = Artist.objects.all()
 	return render(request, 'artists/index.html', {'artists': artists})
 
+# def search(TemplateView):
+# 	return render(request, 'search.html')
+
 
 # these are returning all artist for one user, will change later but i just wanted to get auth up and running
 def profile(request, username):
@@ -97,8 +118,8 @@ def profile(request, username):
 # # should change to artist/:monikr for url
 def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
-	exhibit = Exhibit.objects.all()
-	photo = Photo.objects.all()
+	exhibit = Exhibit.objects.filter(artist=artist)
+	photo = Photo.objects.filter(artist=artist)
 	return render(request, 'artists/page.html', {'artist': artist, 'exhibit': exhibit, 'photo': photo})
 
 

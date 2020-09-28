@@ -5,11 +5,11 @@ from cloudinary.forms import CloudinaryJsFileField, CloudinaryUnsignedJsFileFiel
 from cloudinary.compat import to_bytes
 import cloudinary, hashlib
 
-from .models import Photo
+from .models import PhotoExhibit
 
 class PhotoForm(ModelForm):
     class Meta:
-        model = Photo
+        model = PhotoExhibit
         fields = '__all__'
 
 class PhotoDirectForm(PhotoForm):

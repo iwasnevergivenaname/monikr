@@ -52,7 +52,7 @@ class Commision(models.Model):
     dislcaimer = models.CharField(max_length=250, default=None)
     
 
-class Exhibit(models.Model):
+class TextExhibit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default='title')
     content = models.CharField(max_length=100, default='write it out here')
@@ -60,7 +60,7 @@ class Exhibit(models.Model):
     for_sale = models.BooleanField(blank=False)
 
 
-class Photo(models.Model):
+class PhotoExhibit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     ## Misc Django Fields
     create_time = models.DateTimeField(auto_now_add=True)

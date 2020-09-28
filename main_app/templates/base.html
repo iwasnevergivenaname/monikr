@@ -5,22 +5,50 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>Monkir</title>
 </head>
 <body>
-    <header>
+    <nav style="text-align: justify;">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+            <li><a href="/"><i class="material-icons">home</i></a></li>
+            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+          </ul>
+        </div>
+      </nav>
         <!-- {% if user.is_authenticated %} -->
         <!-- urls for login and profile -->
         <!-- {% else %} -->
         <!-- login anf signup urls -->
         <!-- {% endif %} -->
         <!-- a tag with href -->
-        <!-- <a href="/"><h1>Monkir</h1></a> -->
-    </header>
+        <!-- <a href="/"><h1>welcome to monikr</h1></a> -->
     {% block content %}
     {% endblock %}
-    <footer>
-        all rights reserved, Monkir 2020
-    </footer>
+    <div class="base-footer">
+        <footer class="page-footer pink lighten-2">
+            <div class="container">
+              <div class="row">
+                <div class="col l4 offset-l2 s12">
+                  <ul>
+                    <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="footer-copyright">
+              <div class="container">
+              all rights reserved Monikr 😘, 2020
+              </div>
+            </div>
+          </footer>
+    </div>
 </body>
 </html>

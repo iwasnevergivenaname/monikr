@@ -222,6 +222,9 @@ def tags_show(request, tag_id):
 	tag = Tag.objects.get(id=tag_id)
 	return render(request, 'tags/show.html', {'tag': tag})
 
+#  salon
+def salon(request):
+	return render(request, 'salon/salon.html')
 
 # AUTH
 def signup(request):

@@ -4,6 +4,7 @@ from django.http import HttpResponseRedirect
 from .models import Artist
 from .models import Exhibit
 from .models import Photo
+from .models import Tag
 from django.contrib.auth.models import User
 import json
 
@@ -14,10 +15,9 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 from .forms import PhotoForm, PhotoDirectForm, PhotoUnsignedDirectForm
-# from .models import Photo
 
 
-
+# ARTIST CRUD
 class ArtistCreate(CreateView):
 	model = Artist
 	fields = '__all__'
@@ -45,7 +45,7 @@ class ArtistDelete(DeleteView):
 	success_url = '/artist'
 
 
-#   FIX SUCCESS URL
+#   EXHIBIT CRUD
 class ExhibitCreate(CreateView):
 	model = Exhibit
 	fields = '__all__'
@@ -60,7 +60,7 @@ class ExhibitCreate(CreateView):
 
 class ExhibitUpdate(UpdateView):
 	model = Exhibit
-	fields = ['title', 'content', 'materials_used', 'for_sale']
+	fields = ['title', 'content', 'materials_used', 'for_sale', 'tag']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -71,6 +71,30 @@ class ExhibitUpdate(UpdateView):
 class ExhibitDelete(DeleteView):
 	model = Exhibit
 	success_url = '/exhibit'
+
+
+# TAG CRUD
+class TagCreate(CreateView):
+	model = Tag
+	fields = '__all__'
+	success_url = '/tags'
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.user = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('/tags')
+	
+	
+class TagUpdate(UpdateView):
+	model = Tag
+	fields = ['tag']
+	success_url = '/tags'
+
+
+class TagDelete(DeleteView):
+	model = Tag
+	success_url = '/tags'
 
 
 # Create your views here.
@@ -160,3 +184,15 @@ def direct_upload_complete(request):
 		ret = dict(errors=form.errors)
 	
 	return HttpResponse(json.dumps(ret), content_type='application/json')
+
+
+def tags_index(request):
+	tags = Tag.objects.all()
+	return render(request, 'tags/index.html', {'tags': tags})
+
+
+def tags_show(request, cattoy_id):
+	tag = Tag.objects.get(id=tag_id)
+	return render(request, 'tags/show.html', {'tag': tag})
+
+

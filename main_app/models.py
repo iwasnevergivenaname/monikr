@@ -3,6 +3,12 @@ from django.contrib.auth.models import User
 from cloudinary.models import CloudinaryField
 
 
+class Tag(models.Model):
+    tag = models.CharField(max_length=50, blank=True)
+
+    def __str__(self):
+        return self.tag
+
 class Artist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     monikr = models.CharField(max_length=100)
@@ -14,6 +20,7 @@ class Artist(models.Model):
     artist_statement = models.CharField(max_length=250)
     icon =  models.CharField(max_length=250, default='upload icon')
     bg_color = models.CharField(max_length=50, default='white')
+ 
     # icon =
     # category =
     # location =
@@ -58,6 +65,7 @@ class Photo(models.Model):
     ## Misc Django Fields
     create_time = models.DateTimeField(auto_now_add=True)
     title = models.CharField("Title (optional)", max_length=200, blank=True)
+    tags = models.ManyToManyField(Tag)
 
     ## Points to a Cloudinary image
     image = CloudinaryField('image')
@@ -69,3 +77,4 @@ class Photo(models.Model):
         except AttributeError:
             public_id = ''
         return "Photo <%s:%s>" % (self.title, public_id)
+    

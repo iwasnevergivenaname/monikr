@@ -12,7 +12,17 @@
     <title>Monkir</title>
 </head>
 <body>
-    <header>
+    <nav style="text-align: justify;">
+        <div class="nav-wrapper">
+          <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+          <ul class="right hide-on-med-and-down">
+            <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+            <li><a href="/"><i class="material-icons">home</i></a></li>
+            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
+            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+          </ul>
+        </div>
+      </nav>
         <!-- {% if user.is_authenticated %} -->
         <!-- urls for login and profile -->
         <!-- {% else %} -->
@@ -20,11 +30,10 @@
         <!-- {% endif %} -->
         <!-- a tag with href -->
         <!-- <a href="/"><h1>welcome to monikr</h1></a> -->
-    </header>
     {% block content %}
     {% endblock %}
     <div class="base-footer">
-        <footer class="page-footer">
+        <footer class="page-footer pink lighten-2">
             <div class="container">
               <div class="row">
                 <div class="col l4 offset-l2 s12">

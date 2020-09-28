@@ -4,8 +4,8 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from .models import Artist
-from .models import Exhibit
-from .models import Photo
+from .models import TextExhibit
+from .models import PhotoExhibit
 from .models import Tag
 from django.contrib.auth.models import User
 import json
@@ -48,8 +48,8 @@ class ArtistDelete(DeleteView):
 
 
 #   EXHIBIT CRUD
-class ExhibitCreate(CreateView):
-	model = Exhibit
+class TextExhibitCreate(CreateView):
+	model = TextExhibit
 	fields = '__all__'
 	success_url = '/exhibit'
 	
@@ -60,8 +60,8 @@ class ExhibitCreate(CreateView):
 		return HttpResponseRedirect('/exhibit')
 
 
-class ExhibitUpdate(UpdateView):
-	model = Exhibit
+class TextExhibitUpdate(UpdateView):
+	model = TextExhibit
 	fields = ['title', 'content', 'materials_used', 'for_sale', 'tag']
 	
 	def form_valid(self, form):
@@ -70,8 +70,8 @@ class ExhibitUpdate(UpdateView):
 		return HttpResponseRedirect('/exhibit/' + str(self.object.pk))
 
 
-class ExhibitDelete(DeleteView):
-	model = Exhibit
+class TextExhibitDelete(DeleteView):
+	model = TextExhibit
 	success_url = '/exhibit'
 	
 # SEARCH PAGE AND RESULTS
@@ -141,22 +141,22 @@ def profile(request, username):
 # # should change to artist/:monikr for url
 def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
-	exhibit = Exhibit.objects.filter(artist=artist)
-	photo = Photo.objects.filter(artist=artist)
-	return render(request, 'artists/page.html', {'artist': artist, 'exhibit': exhibit, 'photo': photo})
+	text_exhibit = TextExhibit.objects.filter(artist=artist)
+	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
+	return render(request, 'artists/page.html', {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit})
 
 
-def exhibit(request, pk):
+def text_exhibit(request, pk):
 	artist = Artist.objects.get(pk=pk)
-	exhibit = Exhibit.objects.get(pk=pk)
+	text_exhibit = TextExhibit.objects.get(pk=pk)
 	# photo = Photo.objects.get(pk=pk)
-	return render(request, 'artists/exhibit.html', {'artist': artist, 'exhibit': exhibit})
+	return render(request, 'artists/exhibit.html', {'artist': artist, 'text_exhibit': text_exhibit})
 
 
-def photo(request, pk):
+def photo_exhibit(request, pk):
 	# artist = Artist.objects.get(pk=pk)
-	photo = Photo.objects.get(pk=pk)
-	return render(request, 'artists/exhibit.html', {'photo': photo})
+	photo_exhibit = PhotoExhibit.objects.get(pk=pk)
+	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit})
 
 
 def upload(request):
@@ -210,7 +210,7 @@ def tags_index(request):
 	return render(request, 'tags/index.html', {'tags': tags})
 
 
-def tags_show(request, cattoy_id):
+def tags_show(request, tag_id):
 	tag = Tag.objects.get(id=tag_id)
 	return render(request, 'tags/show.html', {'tag': tag})
 

@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<h1>tag list</h1>
+
+{% for tag in tags %}
+    <div>
+        <a href="{% url 'tags_show' tag.id %}">
+            <div class="card-content">
+                <span>{{ tag.tag }}</span>
+{#                <p>Color: {{ cattoy.color }}</p>#}
+            </div>
+        </a>
+    </div>
+{% endfor %}
+
+{% endblock %}

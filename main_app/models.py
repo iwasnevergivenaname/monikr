@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from cloudinary.models import CloudinaryField
+
 
 class Artist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -23,20 +25,9 @@ class Artist(models.Model):
     def __str__(self):
         return self.monikr
 
-
-# class Piece(models.Model):
-#     # artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-#     title = models.CharField(max_length=50, default=None)
-#     media = models.CharField(max_length=100, default=None)
-#     description = models.CharField(max_length=250, default=None)
-#     materials_used = models.CharField(max_length=100, default=None)
-#     for_sale = models.BooleanField(default=False, blank=False)
-#     price = models.FloatField(default=None)
-#     tw = models.BooleanField(default=False, blank=False)
-#
     
 class Contact(models.Model):
-    # artist_is
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     # email = User.email
     phone = models.IntegerField(default=None)
     website = models.CharField(max_length=50, default=None)
@@ -49,15 +40,32 @@ class Contact(models.Model):
     
     
 class Commision(models.Model):
-    # artist_id
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     isOpened = models.BooleanField(default=False)
     dislcaimer = models.CharField(max_length=250, default=None)
     
 
 class Exhibit(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default='title')
     content = models.CharField(max_length=100, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
     for_sale = models.BooleanField(blank=False)
 
+
+class Photo(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    ## Misc Django Fields
+    create_time = models.DateTimeField(auto_now_add=True)
+    title = models.CharField("Title (optional)", max_length=200, blank=True)
+
+    ## Points to a Cloudinary image
+    image = CloudinaryField('image')
+
+    """ Informative name for model """
+    def __unicode__(self):
+        try:
+            public_id = self.image.public_id
+        except AttributeError:
+            public_id = ''
+        return "Photo <%s:%s>" % (self.title, public_id)

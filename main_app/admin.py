@@ -4,6 +4,7 @@ from .models import Artist
 from .models import Contact
 from .models import Commision
 from .models import Exhibit
+from .models import Photo
 
 
 # Register your models here
@@ -11,3 +12,4 @@ admin.site.register(Artist)
 admin.site.register(Commision)
 admin.site.register(Contact)
 admin.site.register(Exhibit)
+admin.site.register(Photo)

@@ -31,7 +31,11 @@ class Artist(models.Model):
 
     
 class Contact(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    artist = models.OneToOneField(
+        Artist,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
     # email = User.email
     phone = models.IntegerField(default=None)
     website = models.CharField(max_length=50, default=None)
@@ -43,10 +47,14 @@ class Contact(models.Model):
     other = models.CharField(max_length=50, default=None)
     
     
-class Commision(models.Model):
-    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+class Commission(models.Model):
+    artist = models.OneToOneField(
+        Artist,
+        on_delete=models.CASCADE,
+        primary_key=True,
+    )
     isOpened = models.BooleanField(default=False)
-    dislcaimer = models.CharField(max_length=250, default=None)
+    disclaimer = models.CharField(max_length=250, default=None)
     
 
 class TextExhibit(models.Model):

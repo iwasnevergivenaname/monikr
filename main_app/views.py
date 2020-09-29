@@ -12,6 +12,8 @@ from .models import Artist
 from .models import TextExhibit
 from .models import PhotoExhibit
 from .models import Tag
+from .models import Contact
+from .models import Commission
 from django.contrib.auth.models import User
 import json
 
@@ -63,7 +65,7 @@ class TextExhibitCreate(CreateView):
 		self.object = form.save(commit=False)
 		self.object.user = self.request.user
 		self.object.save()
-		return HttpResponseRedirect('/exhibit')
+		return HttpResponseRedirect('/text_exhibit')
 
 
 class TextExhibitUpdate(UpdateView):
@@ -73,7 +75,7 @@ class TextExhibitUpdate(UpdateView):
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
 		self.object.save()
-		return HttpResponseRedirect('/exhibit/' + str(self.object.pk))
+		return HttpResponseRedirect('/text_exhibit/' + str(self.object.pk))
 
 
 class TextExhibitDelete(DeleteView):
@@ -88,12 +90,43 @@ class PhotoExhibitUpdate(UpdateView):
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
 		self.object.save()
-		return HttpResponseRedirect('/exhibit/' + str(self.object.pk))
+		return HttpResponseRedirect('/photo_exhibit/' + str(self.object.pk))
 
 
 class PhotoExhibitDelete(DeleteView):
 	model = PhotoExhibit
 	success_url = '/artist'
+	
+	
+# COMMISSION CRUD
+class CommissionCreate(CreateView):
+	model = Commission
+	fields = ['isOpened', 'disclaimer']
+	success_url = '/artist'
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.user = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('/artist')
+
+
+class CommissionUpdate(UpdateView):
+	model = Commission
+	fields = ['isOpened', 'disclaimer']
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.save()
+		return HttpResponseRedirect('/artist/' + str(self.object.pk))
+
+
+class CommissionDelete(DeleteView):
+	model = Commission
+	success_url = '/artist'
+
+
+# CONTACT CRUD
 
 # SEARCH PAGE AND RESULTS
 class HomePageView(TemplateView):
@@ -166,8 +199,10 @@ def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
+	contact = Contact.objects.filter(artist=artist)
+	commission = Commission.objects.filter(artist=artist)
 	return render(request, 'artists/page.html',
-	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit})
+	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit, 'contact': contact, 'commission': commission})
 
 
 def text_exhibit(request, pk):

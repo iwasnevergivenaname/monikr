@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<a href="/artist"> <-- return to search results</a>
+  <form style="padding: 0 90px 0 90px; margin-top: 20px;" action="" method="post">
+    {% csrf_token %}
+    <table class="artist-form">
+    {{ form.as_table }}
+    </table>
+    <input type="submit" value="send it">
+  </form>
+{% endblock %}

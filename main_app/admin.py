@@ -6,6 +6,7 @@ from .models import Commision
 from .models import TextExhibit
 from .models import PhotoExhibit
 from .models import Tag
+from .models import Observer
 
 
 # Register your models here
@@ -15,3 +16,4 @@ admin.site.register(Contact)
 admin.site.register(TextExhibit)
 admin.site.register(PhotoExhibit)
 admin.site.register(Tag)
+admin.site.register(Observer)

@@ -1,4 +1,5 @@
 {% load static %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,21 +8,18 @@
     <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <title>monkir</title>
 </head>
 <body>
-    <nav style="text-align: justify;">
-        <div class="nav-wrapper">
-          <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
-          <ul class="right hide-on-med-and-down">
-            <li><a href="sass.html"><i class="material-icons">search</i></a></li>
+<nav>
+    <div>
+        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>monikr</a>
+        <ul class="right hide-on-med-and-down">
             <li><a href="/"><i class="material-icons">home</i></a></li>
-            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
-          </ul>
-        </div>
-      </nav>
+            <li><a href="/artist">view artists</a></li>
+        </ul>
+    </div>
+</nav>
         <!-- {% if user.is_authenticated %} -->
         <!-- urls for login and profile -->
         <!-- {% else %} -->
@@ -29,21 +27,28 @@
         <!-- {% endif %} -->
         <!-- a tag with href -->
         <!-- <a href="/"><h1>welcome to monikr</h1></a> -->
+<div class="block-content">
     {% block content %}
     {% endblock %}
-    <div class="base-footer">
-        <footer class="page-footer">
-            <div class="container">
-              <div class="row">
-                <div class="col l4 offset-l2 s12">
-                  <ul>
-                    <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
-                  </ul>
-                </div>
-              </div>
-              all rights reserved Monikr 😘, 2020
+</div>   
+
+{% block css %}
+{% endblock %}
+
+<div>
+    <footer>
+        <div>
+            <div>
+            <div>
+                <ul>
+                <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
+                </ul>
             </div>
-        </footer>
-    </div>
+            </div>
+            all rights reserved Monikr 😘, 2020
+        </div>
+    </footer>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

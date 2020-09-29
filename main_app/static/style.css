@@ -4,80 +4,95 @@ up to date code */
 
 
 h1 {
-    text-align: center;
-    color: purple;
-  }
-  
-  h3, 
-  h4 {
-   text-align: center;
-   color: rgb(121, 121, 218); 
-   font-family: helvetica, arial;
-  }
-  
-  .carousel {
-    position: absolute;
-    margin-top: -5.5%;  
-  }
-  
-  .search {
-    /* border: solid; */
-    padding: 0 80px 0 80px;
-  }
-  
-  .outer-grid {
-    display: flex;
-    flex-wrap: wrap;
-    padding: 0 4px;
-  }
-  .inner-grid {
-    flex: 25%;
-    max-width: 25%;
-    padding: 0 4px;
-  }
-  .inner-grid img {
-    margin-top: 8px;
-    width: 100%;
-    padding: 10px;
-  }
-  
-  input:hover {
-    color: rgb(238, 141, 173);
-    background-color: rgb(117, 42, 192);
-  }
-  
-  input{
-    background-color: pink;
-  }
-  
-  a:hover{
-    color: pink;
-  }
-  
-  .about-title{
-    color: purple;
-    font-size: 60px;
-  }
-  
-  .base-footer, 
-  .homepage,
-  #about-body {
-    text-align: center;
-  }
-  
-  .about{
-    text-align: justify;
-    padding: 0 80px 0 80px;
-  }
-  
-  footer{
-    position: fixed;
-    bottom: 0;
-    height: 130px;
-    width: 100%;
-    background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
-  }
-  
-  nav {
-    background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
-  }
+text-align: center;
+color: purple;
+}
+
+h3, 
+h4 {
+text-align: center;
+color: rgb(121, 121, 218); 
+font-family: helvetica, arial;
+}
+
+.carousel {
+position: absolute;
+margin-top: -5.5%;  
+}
+
+.search {
+/* border: solid; */
+padding: 0 80px 0 80px;
+}
+
+.outer-grid {
+display: flex;
+flex-wrap: wrap;
+padding: 0 4px;
+}
+.inner-grid {
+flex: 25%;
+max-width: 25%;
+padding: 0 4px;
+}
+.inner-grid img {
+margin-top: 8px;
+width: 100%;
+padding: 10px;
+}
+
+input:hover {
+color: rgb(238, 141, 173);
+background-color: rgb(117, 42, 192);
+}
+
+input{
+background-color: pink;
+}
+
+a:hover{
+color: pink;
+}
+
+.about-title{
+color: purple;
+font-size: 60px;
+}
+, 
+.homepage,
+ {
+text-align: center;
+}
+
+/* .about{
+text-align: justify;
+padding: 0 80px 0 80px;
+} */
+
+footer {
+height: 15vh;
+width: 100%;
+background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
+}
+
+nav {
+background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
+}
+
+.grid-container {
+display: grid;
+grid-template-columns: auto auto auto;
+/* background-color: #2196F3; */
+padding: 10px;
+}
+.grid-item {
+background-color: rgba(255, 255, 255, 0.8);
+border: 1px solid rgba(0, 0, 0, 0.8);
+padding: 20px;
+font-size: 30px;
+text-align: center;
+}
+
+.block-content{
+    min-height: 90vh;
+}

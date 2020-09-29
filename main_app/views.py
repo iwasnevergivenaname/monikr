@@ -24,7 +24,7 @@ from .forms import PhotoForm, PhotoDirectForm, PhotoUnsignedDirectForm
 # ARTIST CRUD
 class ArtistCreate(CreateView):
 	model = Artist
-	fields = '__all__'
+	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'icon', 'bg_color']
 	success_url = '/artist'
 	
 	def form_valid(self, form):

@@ -1,27 +1,30 @@
-
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <h2>Something goes here</h2>
+
+  <h2>artists</h2>
   <!-- for alpha's knowledge, this is the view all artist page -->
     <a href="/artist/create">add a new artist</a>
-    <hr />
-  <div class="grid-container">
-    <div class="grid-container">
       {% for artist in artists %}
       <h2><a href='/artist/{{artist.id}}'></h2>
       <p>Name: {{ artist.monikr }}</p>
       </a>
-      <a href='/user/{{artist.user.username}}'>
+      <img src="{{ artist.icon }}" alt="" style="height:110px">
+        {% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+
+      {% comment %} <a href='/user/{{artist.user.username}}'>
         <p>{{artist.user.username}}</p>
-      </a>
-    </div>
-  </div>
+      </a> {% endcomment %}
 {#        {% if cat.age > 0 %}#}
 {#          <p>Age: {{ cat.age }}</p>#}
 {#        {% else %}#}
 {#          <p>Age: Kitten</p>#}
 {#        {% endif %}#}
-        <hr />
-        {% endfor %}
-{% endblock %}

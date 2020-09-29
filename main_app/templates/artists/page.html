@@ -20,8 +20,8 @@
         {{ artist.medium }}<br>
 
             <a href="update/">edit profile</a><br>
-            <a href="../../exhibit/create/">upload a text post</a>
-            <a href="../../exhibit/upload/">upload a photo</a>
+            <a href="../../text_exhibit/create/">upload a text post</a>
+            <a href="../../photo_exhibit/upload/">upload a photo</a>
         <hr/>
         {% for e in text_exhibit %}
             <a href="../../text_exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>

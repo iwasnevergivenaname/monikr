@@ -228,8 +228,13 @@ def tags_show(request, tag_id):
 
 
 #  salon
-def salon(request):
+def salon(request, pk):
+	# salon = Salon.objects.get(pk=pk)
 	return render(request, 'salon/salon.html')
+
+
+def salon_post(request, pk):
+	return render(request, 'salon/salon_post.html')
 
 
 # AUTH

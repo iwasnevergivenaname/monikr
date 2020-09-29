@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
 from django.contrib import auth
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
@@ -44,6 +47,7 @@ class ArtistUpdate(UpdateView):
 		return HttpResponseRedirect('/artist/' + str(self.object.pk))
 
 
+@method_decorator(login_required, name='dispatch')
 class ArtistDelete(DeleteView):
 	model = Artist
 	success_url = '/artist'
@@ -222,27 +226,23 @@ def tags_show(request, tag_id):
 	tag = Tag.objects.get(id=tag_id)
 	return render(request, 'tags/show.html', {'tag': tag})
 
+
 #  salon
 def salon(request):
 	return render(request, 'salon/salon.html')
 
+
 # AUTH
 def signup(request):
-	context = {"error": False}
-	if request.method == "GET":
-		return render(request, 'index.html', context)
-	if request.method == "POST":
-		username = request.POST["username"]
-		password = request.POST["password"]
-		try:
-			user = User.objects.create_user(username=username, password=password)
-			if user is not None:
-				# run the login method to automatically log in user
-				# as they sign up.
-				return login(request)
-		except:
-			context["error"] = f"Username '{username}' already exists."
-			return render(request, 'auth/login.html', context)
+	if request.method == 'POST':
+		form = UserCreationForm(request.POST)
+		if form.is_valid():
+			user = form.save()
+			login(request, user)
+			return render(request, 'index.html', user)
+	else:
+		form = UserCreationForm()
+		return render(request, 'auth/signup.html', {'form': form})
 
 
 def login(request):

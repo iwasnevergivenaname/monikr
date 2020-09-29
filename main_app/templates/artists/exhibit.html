@@ -1,16 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    {% if exhibit %}
-<h2>{{ exhibit.title }}</h2>
-<p>{{ exhibit.content }}</p>
-<h6>materials used: {{ exhibit.materials_used }}</h6><br>
-    {%  elif photo %}
-    <h2>{{ photo.title }}</h2>
-<img src="{{ photo.image.url }}" alt="uploaded image">
-        <p>photo user id : {{ photo.user_id }}</p>
-        <p>photo pk : {{ photo.pk }}</p>
+    {% if text_exhibit %}
+        <h2>{{ text_exhibit.title }}</h2>
+        <p>{{ text_exhibit.content }}</p>
+        <h6>materials used: {{ text_exhibit.materials_used }}</h6><br>
+    {% elif photo_exhibit %}
+        <h2>{{ photo_exhibit.title }}</h2>
+        <img src="{{ photo_exhibit.image.url }}" alt="uploaded image">
+        <p>photo user id : {{ photo_exhibit.user_id }}</p>
+        <p>photo pk : {{ photo_exhibit.pk }}</p>
     {% endif %}
-
-<a href="update/">edit exhibit</a>
+    {% if  user == artist %}
+        <a href="update/">edit exhibit</a>
+    {% endif %}
 {% endblock %}

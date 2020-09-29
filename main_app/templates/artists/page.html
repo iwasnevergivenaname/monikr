@@ -18,21 +18,20 @@
         {{ artist.artist_statement }}<br>
         {{ artist.pronouns }}<br>
         {{ artist.medium }}<br>
-        {% if user == artist %}
+
             <a href="update/">edit profile</a><br>
             <a href="../../exhibit/create/">upload a text post</a>
             <a href="../../exhibit/upload/">upload a photo</a>
-        {% endif %}
         <hr/>
         {% for e in text_exhibit %}
-            <a href="../../exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
+            <a href="../../text_exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
             {{ e.content }}
             <hr>
 
         {% endfor %}
 
         {% for p in photo_exhibit %}
-            <a href="../../photo/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
+            <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
             <img src="{{ p.image.url }}" alt="uploaded image">
 
 

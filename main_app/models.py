@@ -12,9 +12,6 @@ class Tag(models.Model):
 class Artist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     monikr = models.CharField(max_length=100)
-    # style = (
-    #     ('')
-    # )
     pronouns = models.CharField(max_length=50)
     medium = models.CharField(max_length=50)
     artist_statement = models.CharField(max_length=250)
@@ -58,6 +55,7 @@ class TextExhibit(models.Model):
     content = models.CharField(max_length=100, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
     for_sale = models.BooleanField(blank=False)
+    tags = models.ManyToManyField(Tag)
 
 
 class PhotoExhibit(models.Model):
@@ -65,6 +63,8 @@ class PhotoExhibit(models.Model):
     ## Misc Django Fields
     create_time = models.DateTimeField(auto_now_add=True)
     title = models.CharField("Title (optional)", max_length=200, blank=True)
+    description = models.CharField(max_length=100, default='write it out here')
+    materials_used = models.CharField(max_length=100, default='materials')
     tags = models.ManyToManyField(Tag)
 
     ## Points to a Cloudinary image

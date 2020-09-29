@@ -56,7 +56,7 @@ class ArtistDelete(DeleteView):
 #   EXHIBIT CRUD
 class TextExhibitCreate(CreateView):
 	model = TextExhibit
-	fields = '__all__'
+	fields = ['title', 'content', 'materials_used', 'for_sale', 'tag']
 	success_url = '/exhibit'
 	
 	def form_valid(self, form):
@@ -68,7 +68,7 @@ class TextExhibitCreate(CreateView):
 
 class TextExhibitUpdate(UpdateView):
 	model = TextExhibit
-	fields = ['title', 'content', 'materials_used', 'for_sale', 'tag']
+	fields = ['title', 'content', 'materials_used', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -78,8 +78,22 @@ class TextExhibitUpdate(UpdateView):
 
 class TextExhibitDelete(DeleteView):
 	model = TextExhibit
-	success_url = '/exhibit'
+	success_url = '/artist'
 
+
+class PhotoExhibitUpdate(UpdateView):
+	model = TextExhibit
+	fields = ['title', 'description', 'materials_used', 'for_sale', 'tags']
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.save()
+		return HttpResponseRedirect('/exhibit/' + str(self.object.pk))
+
+
+class PhotoExhibitDelete(DeleteView):
+	model = PhotoExhibit
+	success_url = '/artist'
 
 # SEARCH PAGE AND RESULTS
 class HomePageView(TemplateView):

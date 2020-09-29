@@ -2,16 +2,24 @@
 {% load static %}
 {% block content %}
 
-  <h2>artists</h2>
-  <!-- for alpha's knowledge, this is the view all artist page -->
-    <a href="/artist/create">add a new artist</a>
-      {% for artist in artists %}
-      <h2><a href='/artist/{{artist.id}}'></h2>
-      <p>Name: {{ artist.monikr }}</p>
-      </a>
-      <img src="{{ artist.icon }}" alt="" style="height:110px">
-        {% endfor %}
-{% endblock %}
+  <h2 class="artists-text">artists</h2>   
+    wish to see yourself here? click here 👉🏼 <a href="/artist/create">new artist</a></br> 
+ 
+  {% for artist in artists %}
+    <ul class="collection">
+      <li class="collection-item avatar">
+        <img src="{{ artist.icon }}" alt="" class="circle">
+        <span class="title"> <a href='/artist/{{artist.id}}'>
+        <p>Name: {{ artist.monikr }}</p>
+        </a></span>
+        <p>{{ artist.pronouns }}<br>
+          {{ artist.artist_statement }}
+        </p>
+        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
+      </li>
+    </ul>
+    {% endfor %}
+    {% endblock %}
 
 
 

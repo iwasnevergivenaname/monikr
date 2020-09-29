@@ -1,52 +1,130 @@
+
 {% load static %}
+
 <!DOCTYPE html>
 <html>
-<head>
-    <title>monikr</title>
-    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-</head>
-<body>
+ <head>
+  <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <script type = "text/javascript" src = "https://code.jquery.com/jquery-2.1.1.min.js"></script>           
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/js/materialize.min.js"></script>
+ </head>
+<body> 
 <nav>
     <div>
-        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>Logo</a>
+        <a href="#!" class="brand-logo"><i class="material-icons">cloud</i>monikr</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="search.html"><i class="material-icons">search</i></a></li>
             <li><a href="/"><i class="material-icons">home</i></a></li>
-            <li><a href="collapsible.html"><i class="material-icons">refresh</i></a></li>
-            <li><a href="mobile.html"><i class="material-icons">more_vert</i></a></li>
+            <li><a href="/artist">view artists</a></li>
         </ul>
     </div>
 </nav>
-<div class="homepage">
-    <h1>welcome to monikr</h1>
-    <form action="{% url 'search_results' %}" method="get">
-        <label for="q">
-            <input name="q" type="text" placeholder="looking for...">
-        </label>
-    </form>
-
-    <hr/>
-    <a href="/artist">view artists</a>
-    <!-- <footer>all rights reserved Monikr, 2020</footer> -->
-    <footer class="page-footer">
-        <div class="container">
-            <div class="row">
-                <div class="col l4 offset-l2 s12">
-                    <ul>
-                        <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="footer-copyright">
-            <div class="container">
-                all rights reserved Monikr 😘, 2020
-            </div>
-        </div>
-    </footer>
+<form action="{% url 'search_results' %}" method="get" class="search">
+     <label for="q"> 
+        <input name="q" type="text" placeholder="looking for  👀 ..." style=>
+    </label>
+</form>
+<hr/>
+  <h3 style="font-size:2rem;">view our artists' art</h3>
+  <div class="carousel" id="demo-carousel">
+      <a class="carousel-item"><img src="https://i.imgur.com/I8TVans.jpg"></a>
+      <a class="carousel-item"><img src="https://i.imgur.com/KQ8Q0l0.jpg"></a>
+      <a class="carousel-item"><img src="https://i.imgur.com/JtQUa9u.png"></a>
+      <a class="carousel-item"><img src="https://i.imgur.com/zTWGL2V.jpeg"></a>
+      <a class="carousel-item"><img src="https://i.imgur.com/JaPhMQV.jpeg"></a>
+      <a class="carousel-item"><img src="https://sothebys-md.brightspotcdn.com/dims4/default/8368272/2147483647/strip/true/crop/2000x1990+0+0/resize/385x383!/quality/90/?url=http%3A%2F%2Fsothebys-brightspot.s3.amazonaws.com%2Fmedia-desk%2F89%2F06%2F0e99895e4ba0af57a613520516c2%2F309n10359-bjs26-a.jpg"></a>
+  </div>
+  <h3>oil paintings 🎨 <h3>
+  <div class="outer-grid">
+  <div class="inner-grid">
+    <img src="https://afremov.com/images/product/BALLET.jpg"> 
+    <img src="https://images.saatchiart.com/saatchi/1499024/art/7373109/6442315-XWTMFDMK-7.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://www.gallerylafayette.com/wp-content/uploads/2020/07/starry-night-vincent-van-gogh-oil-painting.jpg"> 
+    <img src="https://www.klassikmagazine.com/wp-content/uploads/honeydew.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://royalthaiart.com/wp-content/uploads/2020/03/thailand-pagoda-oil-paintings-for-sale.jpg"> 
+    <img src="https://images.squarespace-cdn.com/content/v1/5aef51a15ffd204ad356f016/1594676914383-0XJJFWJZPKUNXCEHRCEV/ke17ZwdGBToddI8pDm48kBJnOAtaHeBd00-bnIF7KTJ7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z4YTzHvnKhyp6Da-NYroOW3ZGjoBKy3azqku80C789l0rQeu_A0VlcGJEiWdfSJ_zWZ96wkuCj5wPIAJ6ZHWSOhDni8qjVFfxIpUnU5enlYTQ/Enter+Mi+Mundo.jpg?format=1500w"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://www.absolutearts.com/portfolio3/k/kamilla/lilac_in_blue_vase-1504445597m.jpg"> 
+    <img src="https://images.saatchiart.com/saatchi/930258/art/4881719/3951547-SRQXZGMQ-7.jpg"> 
+  </div>
 </div>
-</body>
+<h3>Pencil art 🖌 </h3>
+<div class="outer-grid">
+  <div class="inner-grid">
+    <img src="https://images.squarespace-cdn.com/content/v1/5aef51a15ffd204ad356f016/1594739848370-ZY6WPXIA5CBIRHQQWY7M/ke17ZwdGBToddI8pDm48kKcGNkI_Hrskz6j4HOoGo-h7gQa3H78H3Y0txjaiv_0fDoOvxcdMmMKkDsyUqMSsMWxHk725yiiHCCLfrh8O1z5QPOohDIaIeljMHgDF5CVlOqpeNLcJ80NK65_fV7S1UZSIGqs0Qo0G1gPJe5NV97RJFaIDvawkOhLmvZB2-hDz7cghztGZZkG7eEURAq8bnQ/sketch21.jpg?format=2500w"> 
+    <img src="https://i.pinimg.com/originals/de/7e/96/de7e964c07d3c8c4ca7ca539df171d4d.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://s31531.pcdn.co/wp-content/uploads/2018/04/lee-hammond_Swan_graphite-pencil-drawing-e1551989792469-1024x756.jpg">
+    <img src="https://i1.wp.com/esminity.xyz/wp-content/uploads/2020/01/20-Interesting-and-Beautiful-Pencil-Drawings-2.jpg?ssl=1">
+  </div>
+  <div class="inner-grid">
+    <img src="https://www.artyfactory.com/still-life/images/still_life_pencil_8.jpg">
+    <img src= "https://i.pinimg.com/originals/b6/32/93/b63293c201dc05ac0a79a9a3127e1dec.jpg">
+    <img src="https://www.joshuanava.biz/nature/images/1794_38_72-pencil-shaded-drawings-only-baby-face.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://i.pinimg.com/originals/d6/f7/59/d6f759f023d459a1f8b253d9236439b8.jpg"> 
+    <img src="https://i.ytimg.com/vi/0b4u3FKqkK8/maxresdefault.jpg"> 
+  </div>
+</div>
+<h3>we also carry photography photos 📸 and a few others! 😊</h3>
+<div class="outer-grid">
+  <div class="inner-grid">
+    <img src="https://i.pinimg.com/originals/6f/da/5b/6fda5b8e57e2f5284ddcb9c829759ccc.jpg"> 
+    <img src="https://cdn.shortpixel.ai/client/q_lossy,ret_img,w_768/https://www.pixinfocus.com/wp-content/uploads/2020/06/vertical-lines-8-768x1024.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://ae01.alicdn.com/kf/HTB1ZDG8SXXXXXXgXpXXq6xXFXXXZ.jpg?size=448127&height=800&width=800&hash=80b0cfc16c61def318a38d6a67a1ba64"> 
+    <img src="https://i.pinimg.com/originals/58/21/b4/5821b47035f2a344b41528d558bfd586.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://images.pexels.com/photos/1591447/pexels-photo-1591447.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"> 
+    <img src="https://i0.wp.com/www.tarawildlife.com/wp-content/uploads/2017/05/gilbert-sunset.jpg"> 
+  </div>
+  <div class="inner-grid">
+    <img src="https://i.pinimg.com/564x/85/2c/ec/852cec0ea339b70d18d626d321d1ec5c.jpg">
+    <img src="https://bloximages.chicago2.vip.townnews.com/lompocrecord.com/content/tncms/assets/v3/editorial/3/47/34790b8b-05dd-5dd3-9f9c-c9f634247e7b/5c81ca8798695.image.jpg?resize=1200%2C1559"> 
+  </div>
+</div>
+
+{% comment %} <footer style="text-align: center;" class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col l4 offset-l2 s12">
+                <ul>
+                    <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="footer-copyright">
+        <div class="container">
+            all rights reserved Monikr 😘, 2020
+        </div>
+    </div>
+</footer> {% endcomment %}
+
+<script>
+$(document).ready(function(){
+  $('.carousel').carousel(
+  {
+    duration: 100,
+  }
+  );
+});
+
+autoplay()   
+function autoplay() {
+    $('.carousel').carousel('next');
+    setTimeout(autoplay, 2500);
+}
+</script>
+</body>   
 </html>

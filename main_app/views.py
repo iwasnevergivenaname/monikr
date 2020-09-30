@@ -6,6 +6,8 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
 from .models import Artist
 from .models import TextExhibit
@@ -70,7 +72,7 @@ class TextExhibitCreate(CreateView):
 
 class TextExhibitUpdate(UpdateView):
 	model = TextExhibit
-	fields = ['title', 'content', 'materials_used', 'for_sale', 'tags']
+	fields = ['title', 'description', 'materials_used', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -84,7 +86,7 @@ class TextExhibitDelete(DeleteView):
 
 
 class PhotoExhibitUpdate(UpdateView):
-	model = TextExhibit
+	model = PhotoExhibit
 	fields = ['title', 'description', 'materials_used', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
@@ -96,8 +98,8 @@ class PhotoExhibitUpdate(UpdateView):
 class PhotoExhibitDelete(DeleteView):
 	model = PhotoExhibit
 	success_url = '/artist'
-	
-	
+
+
 # COMMISSION CRUD
 class CommissionCreate(CreateView):
 	model = Commission
@@ -224,24 +226,11 @@ def profile(request, username):
 def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
 	user = User.objects.filter(artist=artist)
-	# print('!!!!!!!!!!!!!')
-	# print(type(user))
-	# for u in user:
-	# 	print('?????????????')
-	# 	print(type(u))
-	# 	print(u)
-	# print('!!!!!!!!!!')
-	# print(not User.objects.get(username=request.user.username))
 	try:
 		currentUser = User.objects.get(username=request.user.username)
 	except Exception as e:
-		print(e)
+		print(f'page error {e}')
 		currentUser = None
-	# if not User.objects.get(username=request.user.username) == False:
-	# 	currentUser = User.objects.create_user('dummy')
-	# else:
-	# 	currentUser = User.objects.get(username=request.user.username)
-	print(currentUser)
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
 	contact = Contact.objects.filter(artist=artist)
@@ -252,15 +241,32 @@ def page(request, pk):
 
 
 def text_exhibit(request, pk):
-	# artist = Artist.objects.get(pk=pk)
 	text_exhibit = TextExhibit.objects.get(pk=pk)
-	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit})
+	artist = Artist.objects.filter(textexhibit=text_exhibit)
+	user = User.objects.filter(artist=artist[0])
+	print('!!!!!!!!!!')
+	print(user)
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+		print('?????????????????')
+		print(currentUser)
+	except Exception as e:
+		print(f"text exhibit error {e}")
+		currentUser = None
+	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit, 'artist': artist, 'currentUser': currentUser})
 
 
 def photo_exhibit(request, pk):
-	# artist = Artist.objects.get(pk=pk)
-	photo_exhibit = PhotoExhibit.objects.filter(pk=pk)
-	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit})
+	photo_exhibit = PhotoExhibit.objects.get(pk=pk)
+	artist = Artist.objects.filter(photoexhibit=photo_exhibit)
+	user = User.objects.filter(artist=artist[0])
+
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(f"photo exhibit error {e}")
+		currentUser = None
+	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit, 'artist': artist, 'currentUser': currentUser})
 
 
 # UPLOAD
@@ -341,23 +347,32 @@ def signup(request):
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
-			return render(request, 'index.html', user)
+			return HttpResponseRedirect({'user': user})
+				# render(request, 'index.html', user)
 	else:
 		form = UserCreationForm()
 		return render(request, 'auth/signup.html', {'form': form})
 
 
-def login(request):
-	context = {"error": False}
-	if request.method == "GET":
-		return render(request, 'auth/login.html')
-	if request.method == "POST":
-		username = request.POST["username"]
-		password = request.POST["password"]
-		user = auth.authenticate(username=username, password=password)
-		if user is not None:
-			auth.login(request, user)
-			return render(request, 'index.html')
+def login_view(request):
+	# if post, then authenticate (user submitted username and password)
+	if request.method == 'POST':
+		form = AuthenticationForm(request, request.POST)
+		if form.is_valid():
+			u = form.cleaned_data['username']
+			p = form.cleaned_data['password']
+			user = authenticate(username=u, password=p)
+			if user is not None:
+				if user.is_active:
+					login(request, user)
+					return HttpResponseRedirect('/')
+				else:
+					print('The account has been disabled.')
+			else:
+				print('The username and/or password is incorrect.')
+	else:  # it was a get request so send the emtpy login form
+		form = AuthenticationForm()
+		return render(request, 'auth/login.html', {'form': form})
 
 
 def logout(request):

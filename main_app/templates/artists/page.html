@@ -18,13 +18,18 @@
         {{ artist.artist_statement }}<br>
         {{ artist.pronouns }}<br>
         {{ artist.medium }}<br>
+        <a href="salon">{{ artist.monikr }}'s salon</a>
 
         <h5>contact</h5>
-        {{ contact.website }}
+        {% for e in contact %}
+            {{ e.website }} <br>
+        {% endfor %}
         <a href="contact/{{ artist.id }}/update">update contact</a><br>
         <h5>commission</h5>
-        opened? {{ commission.isOpen }}<br>
-        disclaimer: {{ commission.disclaimer }}<br>
+        {% for e in commission %}
+            taking commissions? {{ e.isOpened }}<br>
+            commission disclaimer: {{ e.disclaimer }} <br>
+        {% endfor %}
         <a href="commission/{{ artist.id }}/update">update commissions</a><br>
 
         <a href="update/">edit profile</a><br>

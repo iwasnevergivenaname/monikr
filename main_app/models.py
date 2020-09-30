@@ -45,6 +45,9 @@ class Contact(models.Model):
     twitter = models.CharField(max_length=50, default=None)
     etsy = models.CharField(max_length=50, default=None)
     other = models.CharField(max_length=50, default=None)
+
+    def __str__(self):
+        return self.website
     
     
 class Commission(models.Model):
@@ -55,6 +58,9 @@ class Commission(models.Model):
     )
     isOpened = models.BooleanField(default=False)
     disclaimer = models.CharField(max_length=250, default=None)
+
+    def __str__(self):
+        return self.disclaimer
     
 
 class TextExhibit(models.Model):
@@ -64,6 +70,9 @@ class TextExhibit(models.Model):
     materials_used = models.CharField(max_length=100, default='materials')
     for_sale = models.BooleanField(blank=False)
     tags = models.ManyToManyField(Tag)
+
+    def __str__(self):
+        return self.title
 
 
 class PhotoExhibit(models.Model):
@@ -94,3 +103,13 @@ class Observer(models.Model):
     
     def __str__(self):
         return self.username
+    
+class Salon(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    title = models.CharField(max_length=100, default='title')
+    content = models.CharField(max_length=100, default='write it out here')
+    
+class Remebered(models.Model):
+    observer = models.ForeignKey(Observer, on_delete=models.CASCADE)
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)

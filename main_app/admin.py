@@ -7,6 +7,8 @@ from .models import TextExhibit
 from .models import PhotoExhibit
 from .models import Tag
 from .models import Observer
+from .models import Salon
+from .models import Remebered
 
 
 # Register your models here
@@ -17,3 +19,5 @@ admin.site.register(TextExhibit)
 admin.site.register(PhotoExhibit)
 admin.site.register(Tag)
 admin.site.register(Observer)
+admin.site.register(Salon)
+admin.site.register(Remebered)

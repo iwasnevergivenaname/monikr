@@ -14,6 +14,7 @@ from .models import PhotoExhibit
 from .models import Tag
 from .models import Contact
 from .models import Commission
+from .models import Salon
 from django.contrib.auth.models import User
 import json
 
@@ -202,19 +203,19 @@ def page(request, pk):
 	contact = Contact.objects.filter(artist=artist)
 	commission = Commission.objects.filter(artist=artist)
 	return render(request, 'artists/page.html',
-	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit, 'contact': contact, 'commission': commission})
+	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
+	               'contact': contact, 'commission': commission})
 
 
 def text_exhibit(request, pk):
 	artist = Artist.objects.get(pk=pk)
-	text_exhibit = TextExhibit.objects.get(pk=pk)
-	# photo = Photo.objects.get(pk=pk)
+	text_exhibit = TextExhibit.objects.get(artist=artist)
 	return render(request, 'artists/exhibit.html', {'artist': artist, 'text_exhibit': text_exhibit})
 
 
 def photo_exhibit(request, pk):
-	# artist = Artist.objects.get(pk=pk)
-	photo_exhibit = PhotoExhibit.objects.get(pk=pk)
+	artist = Artist.objects.get(pk=pk)
+	photo_exhibit = PhotoExhibit.objects.get(artist=artist)
 	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit})
 
 
@@ -278,12 +279,15 @@ def tags_show(request, tag_id):
 
 #  salon
 def salon(request, pk):
-	# salon = Salon.objects.get(pk=pk)
-	return render(request, 'salon/salon.html')
+	artist = Artist.objects.get(pk=pk)
+	salon = Salon.objects.get(artist=artist)
+	return render(request, 'salon/salon.html', {'artist': artist, 'salon': salon})
 
 
 def salon_post(request, pk):
-	return render(request, 'salon/salon_post.html')
+	artist = Artist.objects.get(pk=pk)
+	salon = Salon.objects.get(artist=artist)
+	return render(request, 'salon/salon_post.html', {'artist': artist, 'salon': salon})
 
 
 # AUTH

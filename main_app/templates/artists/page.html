@@ -25,12 +25,12 @@
             <div class="column">
                 {% for e in text_exhibit %}
                     <a href="../../text_exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
-                    {{ e.content }}
+                    {{ e.content }}<br>
                 {% endfor %}
 
                 {% for p in photo_exhibit %}
                     <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
-                    <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image">
+                    <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"><br>
                 {% endfor %}
             </div>
             <div class="column">

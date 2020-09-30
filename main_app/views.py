@@ -109,7 +109,7 @@ class CommissionCreate(CreateView):
 		self.object = form.save(commit=False)
 		self.object.user = self.request.user
 		self.object.save()
-		return HttpResponseRedirect('/artist')
+		return HttpResponseRedirect('/artist' + str(self.object.pk))
 
 
 class CommissionUpdate(UpdateView):
@@ -128,6 +128,32 @@ class CommissionDelete(DeleteView):
 
 
 # CONTACT CRUD
+class ContactCreate(CreateView):
+	model = Contact
+	fields = ['phone_number', 'website', 'store', 'instagram', 'facebook', 'twitter', 'etsy', 'other']
+	success_url = '/artist'
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.user = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('/artist' + str(self.object.pk))
+
+
+class ContactUpdate(UpdateView):
+	model = Contact
+	fields = ['phone_number', 'website', 'store', 'instagram', 'facebook', 'twitter', 'etsy', 'other']
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.save()
+		return HttpResponseRedirect('/artist/' + str(self.object.pk))
+
+
+class ContactDelete(DeleteView):
+	model = Commission
+	success_url = '/artist'
+
 
 # SEARCH PAGE AND RESULTS
 class HomePageView(TemplateView):

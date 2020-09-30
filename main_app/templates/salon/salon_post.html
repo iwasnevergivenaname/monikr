@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-<h1>view post about ARTIST here</h1>
+<h1>view post about {{ artist.monikr }} here</h1>
+   <h3>{{ salon.title }}</h3> <br>
+    <h6>by {{ salon.author }}</h6><br>
+    <p>{{ salon.content }}</p>
 {% endblock %}

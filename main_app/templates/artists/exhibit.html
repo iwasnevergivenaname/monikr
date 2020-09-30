@@ -1,19 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+
     {% if text_exhibit %}
+{#        {%  for t in text_exhibit %}#}
         <h2> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
         <h6>{{ text_exhibit.tags }}</h6>
+{#        {% endfor %}#}
     {% elif photo_exhibit %}
-        <h2>{{ photo_exhibit.title }}</h2>
-        <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"src="{{ photo_exhibit.image.url }}" alt="uploaded image"><br>
-        <p>description: {{  photo_exhibit.description }}</p>
-        <p>materials used: {{ text_exhibit.materials_used }}</p>
-        <p>tags: {{ text_exhibit.tags }}</p>
-        <p>photo user id : {{ photo_exhibit.user_id }}</p>
-        <p>photo pk : {{ photo_exhibit.pk }}</p></br>
+        {% for p in photo_exhibit %}
+            photo title:  {{ p.title }}
+            <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
+                 src="{{ p.image.url }}"
+                 alt="uploaded image"><br>
+            <p>description: {{ p.description }}</p>
+            <p>materials used: {{ p.materials_used }}</p>
+            <p>tags: {{ p.tags }}</p>
+        {% endfor %}
+
     {% endif %}
     {% if  user == artist %}
         <a href="update/">edit exhibit</a>

@@ -1,8 +1,6 @@
 /* after you are done with a branch, after it gets approved and merged, you have to delete feature/css
 bc you dont want to have oudated code in it. deleteing it and redoing the branch will. have your
 up to date code */
-
-
 h1 {
     text-align: center;
     color: purple;
@@ -20,6 +18,11 @@ h4 {
     text-align: center;
     color: rgb(121, 121, 218); 
     font-family: helvetica, arial;
+}
+
+h5 {
+    text-align: center;
+    font-size: 2.92rem;
 }
 
 .carousel {
@@ -90,6 +93,9 @@ nav {
 .block-content{
     min-height: 90vh;
     padding: 0 90px 0 90px;
+    /* background-image: url(https://img.pngio.com/purple-border-png-99-images-in-collection-page-3-purple-border-png-650_779.jpg); */
+    
+
 }
 
 .artists-text {
@@ -97,4 +103,17 @@ nav {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+/* make a 10% translucent on salon page */
 

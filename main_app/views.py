@@ -59,7 +59,7 @@ class ArtistDelete(DeleteView):
 #   EXHIBIT CRUD
 class TextExhibitCreate(CreateView):
 	model = TextExhibit
-	fields = ['title', 'content', 'materials_used', 'for_sale', 'tag']
+	fields = ['title', 'content', 'materials_used', 'for_sale', 'tags']
 	success_url = '/exhibit'
 	
 	def form_valid(self, form):
@@ -135,7 +135,7 @@ class HomePageView(TemplateView):
 
 
 class SearchResultsView(ListView):
-	model = Artist
+	model = Artist, Tag
 	template_name = 'search_results.html'
 	
 	def get_queryset(self):
@@ -208,14 +208,14 @@ def page(request, pk):
 
 
 def text_exhibit(request, pk):
-	artist = Artist.objects.get(pk=pk)
-	text_exhibit = TextExhibit.objects.get(artist=artist)
-	return render(request, 'artists/exhibit.html', {'artist': artist, 'text_exhibit': text_exhibit})
+	# artist = Artist.objects.get(pk=pk)
+	text_exhibit = TextExhibit.objects.get(pk=pk)
+	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit})
 
 
 def photo_exhibit(request, pk):
-	artist = Artist.objects.get(pk=pk)
-	photo_exhibit = PhotoExhibit.objects.get(artist=artist)
+	# artist = Artist.objects.get(pk=pk)
+	photo_exhibit = PhotoExhibit.objects.filter(pk=pk)
 	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit})
 
 

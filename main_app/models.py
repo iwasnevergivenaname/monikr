@@ -70,7 +70,7 @@ class TextExhibit(models.Model):
     title = models.CharField(max_length=100, default='title')
     content = models.TextField(max_length=1000, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
-    for_sale = models.BooleanField(blank=False)
+    for_sale = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
 
     def __str__(self):
@@ -84,6 +84,7 @@ class PhotoExhibit(models.Model):
     title = models.CharField("Title (optional)", max_length=200, blank=True)
     description = models.CharField(max_length=100, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
+    for_sale = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
 
     ## Points to a Cloudinary image

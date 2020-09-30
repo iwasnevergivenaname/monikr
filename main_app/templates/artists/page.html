@@ -6,7 +6,7 @@
         hi
     {% endif %}
     <a href="/artist"> <- return to search results</a>
-    <div style="background-color: {{ artist.bg_color }}">
+    <div style="background: {{ artist.bg_color }}">
         <h1>monikr</h1>
         <div class="row">
             <div class="column">
@@ -35,8 +35,8 @@
                 {% endfor %}
 
                 {% for p in photo_exhibit %}
-                    <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
-                    <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"><br>
+                    <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong><br>
+                    <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"></a><br>
                 {% endfor %}
             </div>
             <div class="column">
@@ -62,6 +62,10 @@
                 {% endfor %}
             </div>
         </div>
+{#    {% if photo_exhibit.all == None %}#}
         <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
+{#        {% else %}#}
+{##}
+{#    {% endif %}#}
     </div>
 {% endblock %}

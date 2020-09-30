@@ -4,7 +4,7 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('signup/', views.signup, name="signup"),
-    path('login/', views.login, name="login"),
+    path('login/', views.login_view, name="login"),
     path('logout/', views.logout, name="logout"),
     path('about/', views.about, name='about'),
     path('artist/', views.artist_index, name='artist_index'),
@@ -19,6 +19,7 @@ urlpatterns = [
     path('text_exhibit/<int:pk>/delete/', views.TextExhibitDelete.as_view(), name='text_exhibit_delete'),
     path('photo_exhibit/upload/', views.upload, name='upload'),
     path('photo_exhibit/<int:pk>/', views.photo_exhibit, name='photo_exhibit'),
+    path('photo_exhibit/<int:pk>/update/', views.PhotoExhibitUpdate.as_view(), name='photo_exhibit_update'),
     path('photo_exhibit/<int:pk>/delete/', views.PhotoExhibitDelete.as_view(), name='photo_exhibit_delete'),
     path('artist/<int:pk>/commission/<id>/update/', views.CommissionUpdate.as_view(), name='commission_update'),
     path('artist/<int:pk>/contact/<id>/update/', views.ContactUpdate.as_view(), name='contact_update'),

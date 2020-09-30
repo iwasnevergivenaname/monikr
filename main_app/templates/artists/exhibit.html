@@ -1,25 +1,26 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <a href='/artist/{{artist.id}}'> go back to profile page</a>
+    <a href='/artist/{{ artist.id }}'> go back to profile page</a>
     {% if text_exhibit %}
         <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}s'</a> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
         <h6>{{ text_exhibit.tags }}</h6>
     {% elif photo_exhibit %}
-        {% for p in photo_exhibit %}
-            <h2><a href="/artist/{{ p.artist.id }}">{{ p.artist }}s'</a> {{ p.title }} </h2>
+            <h2><a href="/artist/{{ photo_exhibit.artist.id }}">{{ photo_exhibit.artist }}s'</a> {{ photo_exhibit.title }} </h2>
             <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
-                 src="{{ p.image.url }}"
+                 src="{{ photo_exhibit.image.url }}"
                  alt="uploaded image"><br>
-            <p>description: {{ p.description }}</p>
-            <p>materials used: {{ p.materials_used }}</p>
-            <p>tags: {{ p.tags }}</p>
-        {% endfor %}
+            <p>description: {{ photo_exhibit.description }}</p>
+            <p>materials used: {{ photo_exhibit.materials_used }}</p>
+            <p>tags: {{ photo_exhibit.tags }}</p>
 
     {% endif %}
-    {% if  user == artist %}
-        <a href="update/">edit exhibit</a>
-    {% endif %}
+
+        {% if currentUser.username == user.username %}
+            <a href="update/">edit exhibit</a>
+            <a href="delete/">delete exhibit</a>
+        {% endif %}
+
 {% endblock %}

@@ -34,18 +34,24 @@
         {% for e in text_exhibit %}
             <a href="../../text_exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
             {{ e.content }}
-            <hr>
 
         {% endfor %}
 
         {% for p in photo_exhibit %}
             <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
-            <img src="{{ p.image.url }}" alt="uploaded image">
+            <img style="height:50%; width:50%;"src="{{ p.image.url }}" alt="uploaded image">
 
+            <div class="row">
+                <div class="col s12"><p>hello</p></div>
+                <div class="col s12 m4 l2"><p>s12 m4</p></div>
+                <div class="col s12 m4 l8"><p>s12 m4</p></div>
+                <div class="col s12 m4 l2"><p>s12 m4</p></div>
+            </div>
 
+        {% empty %}
+        <h4> this monikr has not yet uploaded any of their art up. try again next time 😊 </h4>
         {% endfor %}
 
-        <hr/>
     </div>
 
 {% endblock %}

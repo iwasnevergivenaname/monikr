@@ -5,8 +5,10 @@
     {% if not not currentUser == True  %}
         hi
     {% endif %}
+
     <a href="/artist"> <- return to search results</a>
     <div style="background: {{ artist.bg_color }}">
+
         <h1>monikr</h1>
         <div class="row">
             <div class="column">
@@ -35,24 +37,27 @@
                 {% endfor %}
 
                 {% for p in photo_exhibit %}
+
                     <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong><br>
                     <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"></a><br>
+                    {% empty %}
+                    <p style="text-align:center;margin-left:auto; margin-right:auto;">
+
                 {% endfor %}
             </div>
             <div class="column">
-                <h5>contact</h5>
+                <h5>contact:</h5>
                 {% for e in contact %}
-                    {{ e.website }} <br>
+                    {{ e.website }} 
                 {% endfor %}
-                <a href="contact/{{ artist.id }}/update">update contact</a><br>
-                <h5>commission</h5>
+                <a href="contact/{{ artist.id }}/update">update contact</a>
+                <h5>commission: </h5>
                 {% for e in commission %}
                     taking commissions? {{ e.isOpened }}<br>
                     commission disclaimer: {{ e.disclaimer }} <br>
                 {% endfor %}
                 {% for u in user %}
                     {% if currentUser.username == u.username %}
-                        {{ u }}
                         <a href="commission/{{ artist.id }}/update">update commissions</a><br>
 
                         <a href="update/">edit profile</a><br>
@@ -62,10 +67,12 @@
                 {% endfor %}
             </div>
         </div>
+
 {#    {% if photo_exhibit.all == None %}#}
         <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
 {#        {% else %}#}
 {##}
 {#    {% endif %}#}
+
     </div>
 {% endblock %}

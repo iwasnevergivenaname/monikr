@@ -2,13 +2,16 @@
 
 {% block content %}
     <a href='/artist/{{ artist.id }}'> go back to profile page</a>
+
     {% if text_exhibit %}
-        <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}s'</a> {{ text_exhibit.title }}</h2>
+        <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}</a> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
         <h6>{{ text_exhibit.tags }}</h6>
     {% elif photo_exhibit %}
+
             <h2><a href="/artist/{{ photo_exhibit.artist.id }}">{{ photo_exhibit.artist }}s'</a> {{ photo_exhibit.title }} </h2>
+
             <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
                  src="{{ photo_exhibit.image.url }}"
                  alt="uploaded image"><br>

@@ -2,7 +2,7 @@
 {% load cloudinary %}
 
 {% block content %}
-<a href="/artist"> <- return to search results</a>
+    <a href="/artist"> <- return to search results</a>
     <div style="background-color: {{ artist.bg_color }}">
         <h1>monikr</h1>
         <div class="row">
@@ -30,7 +30,8 @@
 
                 {% for p in photo_exhibit %}
                     <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong></a><br>
-                    <img style="height:50%; width:50%;"src="{{ p.image.url }}" alt="uploaded image">
+                    <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image">
+                {% endfor %}
             </div>
             <div class="column">
                 <h5>contact</h5>
@@ -42,18 +43,18 @@
                 {% for e in commission %}
                     taking commissions? {{ e.isOpened }}<br>
                     commission disclaimer: {{ e.disclaimer }} <br>
+
+                    <a href="commission/{{ artist.id }}/update">update commissions</a><br>
+
+                    <a href="update/">edit profile</a><br>
+                    <a href="../../text_exhibit/create/">upload a text post</a> |
+                    <a href="../../photo_exhibit/upload/">upload a photo</a>
+                    </div>
+                    </div>
+
+                {% empty %}
+                    <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
                 {% endfor %}
-                <a href="commission/{{ artist.id }}/update">update commissions</a><br>
-
-                <a href="update/">edit profile</a><br>
-                <a href="../../text_exhibit/create/">upload a text post</a> |
-                <a href="../../photo_exhibit/upload/">upload a photo</a>
-            </div>
-        </div>
-
-        {% empty %}
-        <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
-        {% endfor %}
 
     </div>
 {% endblock %}

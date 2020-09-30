@@ -5,6 +5,8 @@ from cloudinary.models import CloudinaryField
 
 class Tag(models.Model):
     tag = models.CharField(max_length=50, blank=True)
+    # photo_exhibits = models.ManyToManyField(PhotoExhibit)
+    # text_exhibits = models.ManyToManyField(TextExhibit)
 
     def __str__(self):
         return self.tag
@@ -12,7 +14,7 @@ class Tag(models.Model):
 class Artist(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     monikr = models.CharField(max_length=100)
-    pronouns = models.CharField(max_length=50)
+    pronouns = models.CharField(max_length=50, blank=True)
     medium = models.CharField(max_length=50)
     artist_statement = models.CharField(max_length=250)
     icon =  models.CharField(max_length=250, default='upload icon')
@@ -37,14 +39,14 @@ class Contact(models.Model):
         primary_key=True,
     )
     # email = User.email
-    phone = models.IntegerField(default=None)
-    website = models.CharField(max_length=50, default=None)
-    store = models.CharField(max_length=50, default=None)
-    instagram = models.CharField(max_length=50, default=None)
-    facebook = models.CharField(max_length=50, default=None)
-    twitter = models.CharField(max_length=50, default=None)
-    etsy = models.CharField(max_length=50, default=None)
-    other = models.CharField(max_length=50, default=None)
+    phone_number = models.IntegerField(default=None, blank=True)
+    website = models.CharField(max_length=50, blank=True)
+    store = models.CharField(max_length=50, blank=True)
+    instagram = models.CharField(max_length=50, blank=True)
+    facebook = models.CharField(max_length=50, blank=True)
+    twitter = models.CharField(max_length=50, blank=True)
+    etsy = models.CharField(max_length=50, blank=True)
+    other = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.website
@@ -57,7 +59,7 @@ class Commission(models.Model):
         primary_key=True,
     )
     isOpened = models.BooleanField(default=False)
-    disclaimer = models.CharField(max_length=250, default=None)
+    disclaimer = models.TextField(max_length=250, blank=True)
 
     def __str__(self):
         return self.disclaimer
@@ -66,7 +68,7 @@ class Commission(models.Model):
 class TextExhibit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default='title')
-    content = models.CharField(max_length=100, default='write it out here')
+    content = models.TextField(max_length=1000, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
     for_sale = models.BooleanField(blank=False)
     tags = models.ManyToManyField(Tag)
@@ -108,7 +110,7 @@ class Salon(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     title = models.CharField(max_length=100, default='title')
-    content = models.CharField(max_length=100, default='write it out here')
+    content = models.TextField(max_length=1000, default='write it out here')
     
 class Remebered(models.Model):
     observer = models.ForeignKey(Observer, on_delete=models.CASCADE)

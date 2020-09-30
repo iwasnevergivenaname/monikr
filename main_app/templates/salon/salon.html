@@ -1,10 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<div style="text-align:center;">
-    <h1>view all {{ artist.monikr }} salon posts here</h1><br>
-    {#    {% for post in salon %}#}
-        <a href="{{ salon.id }}"><h5 style="font-size: 2.92rem;">{{ salon.title }}</h3></a>
-<div>
-{#    {% endfor %}#}
+    {%  %}
+        <h1>hello</h1>
+    {% else %}
+
+        <div style="text-align:center;">
+        <h1>view all {{ artist.monikr }} salon posts here</h1><br>
+{#            {% for post in salon %}#}
+        <a href="{{ salon.id }}"><h5 style="font-size: 2.92rem;">{{ salon.title }}</h5></a>
+        <div>
+    {% endif %}
 {% endblock %}

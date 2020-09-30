@@ -3,15 +3,13 @@
 {% block content %}
 
     {% if text_exhibit %}
-{#        {%  for t in text_exhibit %}#}
-        <h2> {{ text_exhibit.title }}</h2>
+        <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}s'</a> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
         <h6>{{ text_exhibit.tags }}</h6>
-{#        {% endfor %}#}
     {% elif photo_exhibit %}
         {% for p in photo_exhibit %}
-            photo title:  {{ p.title }}
+            <h2><a href="/artist/{{ p.artist.id }}">{{ p.artist }}s'</a> {{ p.title }} </h2>
             <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
                  src="{{ p.image.url }}"
                  alt="uploaded image"><br>

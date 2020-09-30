@@ -21,6 +21,7 @@ urlpatterns = [
     path('photo_exhibit/<int:pk>/', views.photo_exhibit, name='photo_exhibit'),
     path('photo_exhibit/<int:pk>/delete/', views.PhotoExhibitDelete.as_view(), name='photo_exhibit_delete'),
     path('artist/<int:pk>/commission/<id>/update/', views.CommissionUpdate.as_view(), name='commission_update'),
+    path('artist/<int:pk>/contact/<id>/update/', views.ContactUpdate.as_view(), name='contact_update'),
     path('search/', views.SearchResultsView.as_view(), name='search_results'),
     path('tags/', views.tags_index, name='tags_index'),
     path('tags/<int:tag_id>', views.tags_show, name='tags_show'),

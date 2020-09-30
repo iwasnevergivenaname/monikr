@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html>
  <head>
@@ -14,13 +13,14 @@
     <div>
         <a href="/" class="brand-logo"><i class="material-icons">cloud</i>monikr</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="/about">about monikr</a></li>
+            <li><a href="/"><i class="material-icons">home</i></a></li>
           {% comment %} {% if user.is_authenticated %}   {% endcomment %}
             <li><a href="/logout">logout</a></li>
             {% comment %} {% else %} {% endcomment %}
             <li><a href="/login">login</a></li>
             <li><a href="/signup">sign up</a></li>
             <li><a href="/artist">view artists</a></li>
+            <li><a href="/about">about monikr</a></li>
         </ul>
     </div>
 </nav>
@@ -97,8 +97,6 @@
     <img src="https://bloximages.chicago2.vip.townnews.com/lompocrecord.com/content/tncms/assets/v3/editorial/3/47/34790b8b-05dd-5dd3-9f9c-c9f634247e7b/5c81ca8798695.image.jpg?resize=1200%2C1559"> 
   </div>
 </div>
-
-
 {% comment %} <footer style="text-align: center;" class="page-footer">
     <div class="container">
         <div class="row">
@@ -123,7 +121,6 @@ $(document).ready(function(){
   }
   );
 });
-
 autoplay()   
 function autoplay() {
     $('.carousel').carousel('next');

@@ -310,9 +310,9 @@ def salon(request, pk):
 	return render(request, 'salon/salon.html', {'artist': artist, 'salon': salon})
 
 
-def salon_post(request, pk):
+def salon_post(request, pk, id):
 	artist = Artist.objects.get(pk=pk)
-	salon = Salon.objects.get(artist=artist)
+	salon = Salon.objects.get(id=id)
 	return render(request, 'salon/salon_post.html', {'artist': artist, 'salon': salon})
 
 

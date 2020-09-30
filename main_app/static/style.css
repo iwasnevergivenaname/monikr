@@ -10,6 +10,9 @@ h1 {
 
 h2{
     text-align: center;
+    background-image: linear-gradient(to left, rgb(235, 211, 114), rgb(134, 133, 48), rgb(231, 124, 62), rgb(221, 71, 44));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
 }
   
 h3, 
@@ -94,3 +97,4 @@ nav {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
+

@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib import auth
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
@@ -224,13 +223,32 @@ def profile(request, username):
 # # should change to artist/:monikr for url
 def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
+	user = User.objects.filter(artist=artist)
+	# print('!!!!!!!!!!!!!')
+	# print(type(user))
+	# for u in user:
+	# 	print('?????????????')
+	# 	print(type(u))
+	# 	print(u)
+	# print('!!!!!!!!!!')
+	# print(not User.objects.get(username=request.user.username))
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(e)
+		currentUser = None
+	# if not User.objects.get(username=request.user.username) == False:
+	# 	currentUser = User.objects.create_user('dummy')
+	# else:
+	# 	currentUser = User.objects.get(username=request.user.username)
+	print(currentUser)
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
 	contact = Contact.objects.filter(artist=artist)
 	commission = Commission.objects.filter(artist=artist)
 	return render(request, 'artists/page.html',
 	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
-	               'contact': contact, 'commission': commission})
+	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser})
 
 
 def text_exhibit(request, pk):

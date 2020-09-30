@@ -2,6 +2,9 @@
 {% load cloudinary %}
 
 {% block content %}
+    {% if not not currentUser == True  %}
+        hi
+    {% endif %}
     <a href="/artist"> <- return to search results</a>
     <div style="background-color: {{ artist.bg_color }}">
         <h1>monikr</h1>
@@ -20,6 +23,9 @@
                 {{ artist.artist_statement }}<br>
                 {{ artist.pronouns }}<br>
                 {{ artist.medium }}<br>
+                {% for u in user %}
+                    user: {{ u.username }}<br>
+                {% endfor %}
                 <a href="salon">{{ artist.monikr }}'s salon</a>
             </div>
             <div class="column">
@@ -43,18 +49,19 @@
                 {% for e in commission %}
                     taking commissions? {{ e.isOpened }}<br>
                     commission disclaimer: {{ e.disclaimer }} <br>
-
-                    <a href="commission/{{ artist.id }}/update">update commissions</a><br>
-
-                    <a href="update/">edit profile</a><br>
-                    <a href="../../text_exhibit/create/">upload a text post</a> |
-                    <a href="../../photo_exhibit/upload/">upload a photo</a>
-                    </div>
-                    </div>
-
-                {% empty %}
-                    <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
                 {% endfor %}
+                {% for u in user %}
+                    {% if currentUser.username == u.username %}
+                        {{ u }}
+                        <a href="commission/{{ artist.id }}/update">update commissions</a><br>
 
+                        <a href="update/">edit profile</a><br>
+                        <a href="../../text_exhibit/create/">upload a text post</a> |
+                        <a href="../../photo_exhibit/upload/">upload a photo</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
     </div>
 {% endblock %}

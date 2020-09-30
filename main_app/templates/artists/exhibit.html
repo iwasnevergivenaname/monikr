@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+    <a href='/artist/{{artist.id}}'> go back to profile page</a>
     {% if text_exhibit %}
         <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}s'</a> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>

@@ -15,18 +15,16 @@
     <div>
         <a href="/" class="brand-logo"><i class="material-icons">cloud</i>monikr</a>
         <ul class="right hide-on-med-and-down">
-            <li><a href="/"><i class="material-icons">home</i></a></li>
+            <li><a href="/about">about monikr</a></li>
+          {% comment %} {% if user.is_authenticated %}   {% endcomment %}
+            <li><a href="/logout">logout</a></li>
+            {% comment %} {% else %} {% endcomment %}
+            <li><a href="/login">login</a></li>
+            <li><a href="/signup">sign up</a></li>
             <li><a href="/artist">view artists</a></li>
         </ul>
     </div>
 </nav>
-        <!-- {% if user.is_authenticated %} -->
-        <!-- urls for login and profile -->
-        <!-- {% else %} -->
-        <!-- login anf signup urls -->
-        <!-- {% endif %} -->
-        <!-- a tag with href -->
-        <!-- <a href="/"><h1>welcome to monikr</h1></a> -->
 <div class="block-content">
     {% block content %}
     {% endblock %}
@@ -34,21 +32,6 @@
 
 {% block css %}
 {% endblock %}
-
-{% comment %} <div>
-    <footer>
-        <div>
-            <div>
-            <div>
-                <ul>
-                <li><a class="grey-text text-lighten-3" href="/about">about us</a></li>
-                </ul>
-            </div>
-            </div>
-            all rights reserved Monikr 😘, 2020
-        </div>
-    </footer>
-</div> {% endcomment %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 </body>
 </html>

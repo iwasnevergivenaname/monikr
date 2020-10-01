@@ -9,6 +9,7 @@ from .models import Tag
 from .models import Observer
 from .models import Salon
 from .models import Remebered
+from .models import Icon
 
 
 # Register your models here
@@ -21,3 +22,4 @@ admin.site.register(Tag)
 admin.site.register(Observer)
 admin.site.register(Salon)
 admin.site.register(Remebered)
+admin.site.register(Icon)

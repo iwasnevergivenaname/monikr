@@ -17,7 +17,7 @@ class Artist(models.Model):
     pronouns = models.CharField(max_length=50, blank=True)
     medium = models.CharField(max_length=50)
     artist_statement = models.CharField(max_length=250)
-    icon =  models.CharField(max_length=250, default='upload icon')
+    iconphoto =  models.CharField(max_length=250, default='upload icon')
     bg_color = models.CharField(max_length=50, default='white')
  
     # icon =
@@ -86,6 +86,22 @@ class PhotoExhibit(models.Model):
     materials_used = models.CharField(max_length=100, default='materials')
     for_sale = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
+
+    ## Points to a Cloudinary image
+    image = CloudinaryField('image')
+
+    """ Informative name for model """
+    def __unicode__(self):
+        try:
+            public_id = self.image.public_id
+        except AttributeError:
+            public_id = ''
+        return "Photo <%s:%s>" % (self.title, public_id)
+    
+class Icon(models.Model):
+    artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    ## Misc Django Fields
+    create_time = models.DateTimeField(auto_now_add=True)
 
     ## Points to a Cloudinary image
     image = CloudinaryField('image')

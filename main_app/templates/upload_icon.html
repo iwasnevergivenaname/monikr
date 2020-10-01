@@ -6,7 +6,7 @@
 {% block content %}
      <!-- A standard form for sending the image data to your server -->
   <div id='backend_upload'>
-    <h1>upload a photo</h1>
+    <h1>upload an icon</h1>
     <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ backend_form }}

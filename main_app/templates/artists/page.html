@@ -45,24 +45,31 @@
                 {% for e in contact %}
                     {{ e.website }}
                 {% endfor %}
-                <a href="contact/{{ artist.id }}/update">update contact</a>
                 <h5>commission: </h5>
                 {% for e in commission %}
-                    taking commissions? {{ e.isOpened }}<br>
+                    taking commissions?
+                    {% if e.isOpened == False %}
+                    not right now<br>
+                    {% else %}
+                    yes!<br>
+                    {% endif %}
+                    {% if e.disclaimer %}
                     commission disclaimer: {{ e.disclaimer }} <br>
+                    {% endif %}
                 {% endfor %}
                 {% for u in user %}
                     {% if currentUser.username == u.username %}
                         <a href="commission/{{ artist.id }}/update">update commissions</a><br>
 
                         <a href="update/">edit profile</a><br>
+                        <a href="contact/{{ artist.id }}/update">update contact</a>
                         <a href="../../text_exhibit/create/">upload a text post</a> |
                         <a href="../../photo_exhibit/upload/">upload a photo</a>
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
-            {% if not photo_exhibit %}
+            {% if not photo_exhibit and not text_exhibit %}
         <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
 
             {% endif %}

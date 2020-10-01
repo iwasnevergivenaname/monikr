@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
+{% load materializecss %}
+
 
 
     <a href='/artist/{{ artist.id }}'> go back to profile page</a>
@@ -8,7 +10,7 @@
     {% else %}
 
         <div style="text-align:center;">
-        <h1>{{ artist.monikr }}s' salon</h1><br>
+        <h1 >{{ artist.monikr }}s' salon</h1><br>
         <a href="create/">create a post about {{ artist.monikr }}</a>
 {#        {{ salon.title }}#}
         {% for post in salon %}

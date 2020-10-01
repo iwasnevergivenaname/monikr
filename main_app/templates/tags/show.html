@@ -2,11 +2,12 @@
 {% block content %}
 
     <h1>{{ tags.tag }} details</h1>
+    <p style="text-align:center;">feel free to click on the art you like to see more details on it 😊</p>
 
     <div>
         <div>
             {% for p in photo_exhibit %}
-                <a href="/photo_exhibit/{{ p.id }}/"><img src="{{ p.image.url }}" alt="attached photos"></a><br>
+                <a href="/photo_exhibit/{{ p.id }}/"><img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"src="{{ p.image.url }}" alt="attached photos"></a><br>
             {% endfor %}
         {% for t in text_exhibit %}
             <h2><a href="/text_exhibit/{{ t.id }}/">{{ t.title }}</a></h2><br>

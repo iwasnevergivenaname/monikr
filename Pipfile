@@ -13,6 +13,7 @@ django-cors-headers = "*"
 dj-database-url = "*"
 psycopg2 = "*"
 whitenoise = "*"
+decouple = "*"
 
 [requires]
 python_version = "3.8"

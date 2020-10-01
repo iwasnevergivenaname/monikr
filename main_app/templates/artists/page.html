@@ -9,7 +9,8 @@
     <a href="/artist"> <- return to search results</a>
     <div style="background: {{ artist.bg_color }}">
 
-        <h1>monikr</h1>
+        <h1><em>{{ artist.monikr }}</em></h1><br>
+        <h6 style="text-align: center">{{ artist.artist_statement }}</h6>
         <div class="row">
             <div class="column">
                 <img src="{{ artist.icon }}" alt="" style="height:190px"><br>
@@ -20,14 +21,8 @@
                 {#                                gravity = "face")#}
                 {#    {% cloudinary image width=120 height=120 crop="fill" %}#}
                 {#    <img src="https://res.cloudinary.com/dvviaroqm/image/upload/v1601239146/iKdy0bn_wm1mhp.jpg" alt="icon" />#}
-
-                {{ artist.monikr }}<br>
-                {{ artist.artist_statement }}<br>
                 {{ artist.pronouns }}<br>
                 {{ artist.medium }}<br>
-                {% for u in user %}
-                    user: {{ u.username }}<br>
-                {% endfor %}
                 <a href="salon">{{ artist.monikr }}'s salon</a>
             </div>
             <div class="column">
@@ -67,12 +62,10 @@
                 {% endfor %}
             </div>
         </div>
-
-        {#    {% if photo_exhibit.all == None %}#}
+            {% if not photo_exhibit %}
         <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
-        {#        {% else %}#}
-        {##}
-        {#    {% endif %}#}
+
+            {% endif %}
 
     </div>
 {% endblock %}

@@ -1,11 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
-{% if artist != artist %}
-<h1>hello</h1>
+
+
+    <a href='/artist/{{ artist.id }}'> go back to profile page</a>
+    {% if artist != artist %}
+        <h1>hello</h1>
     {% else %}
-        <a href='/artist/{{artist.id}}'> go back to profile page</a>
-        <h1>view all {{ artist.monikr }} salon posts here</h1><br>
-    {#            {% for post in salon %}#}
-        <a href="{{ salon.id }}"><h5 style="font-size: 2.92rem;">{{ salon.title }}</h5></a>
+
+        <div style="text-align:center;">
+        <h1>{{ artist.monikr }}s' salon</h1><br>
+        <a href="create/">create a post about {{ artist.monikr }}</a>
+{#        {{ salon.title }}#}
+        {% for post in salon %}
+{#            {{ post.title }}#}
+            <a href="{{ post.id }}"><h5 style="font-size: 2.92rem;">{{ post.title }}</h5></a>
+        {% endfor %}
+        <div>
     {% endif %}
 {% endblock %}

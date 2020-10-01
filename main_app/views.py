@@ -6,7 +6,10 @@ from django.utils.decorators import method_decorator
 from django.views.generic import TemplateView, ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
+from itertools import chain
 from .models import Artist
 from .models import TextExhibit
 from .models import PhotoExhibit
@@ -84,7 +87,7 @@ class TextExhibitDelete(DeleteView):
 
 
 class PhotoExhibitUpdate(UpdateView):
-	model = TextExhibit
+	model = PhotoExhibit
 	fields = ['title', 'description', 'materials_used', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
@@ -96,8 +99,8 @@ class PhotoExhibitUpdate(UpdateView):
 class PhotoExhibitDelete(DeleteView):
 	model = PhotoExhibit
 	success_url = '/artist'
-	
-	
+
+
 # COMMISSION CRUD
 class CommissionCreate(CreateView):
 	model = Commission
@@ -159,15 +162,19 @@ class HomePageView(TemplateView):
 	template_name = 'search.html'
 
 
+
 class SearchResultsView(ListView):
 	model = Artist, Tag
 	template_name = 'search_results.html'
 	
 	def get_queryset(self):
 		query = self.request.GET.get('q')
-		object_list = Artist.objects.filter(
+		tag = Tag.objects.filter(Q(tag__icontains=query))
+		artist = Artist.objects.filter(
 			Q(monikr__icontains=query) | Q(artist_statement__icontains=query)
-		)
+		).select_related()
+		object_list = chain(tag, artist)
+		print(object_list)
 		return object_list
 
 
@@ -193,6 +200,34 @@ class TagUpdate(UpdateView):
 class TagDelete(DeleteView):
 	model = Tag
 	success_url = '/tags'
+
+
+# Salon CRUD
+class SalonCreate(CreateView):
+	model = Salon
+	fields = ['artist', 'title', 'content']
+	success_url = '/salon'
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.author = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('../' + str(self.object.pk))
+
+
+class SalonUpdate(UpdateView):
+	model = Salon
+	fields = ['artist', 'author', 'title', 'content']
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.save()
+		return HttpResponseRedirect('/salon/' + str(self.object.pk))
+
+
+class SalonDelete(DeleteView):
+	model = Salon
+	success_url = '/salon'
 
 
 # Create your views here.
@@ -224,24 +259,11 @@ def profile(request, username):
 def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
 	user = User.objects.filter(artist=artist)
-	# print('!!!!!!!!!!!!!')
-	# print(type(user))
-	# for u in user:
-	# 	print('?????????????')
-	# 	print(type(u))
-	# 	print(u)
-	# print('!!!!!!!!!!')
-	# print(not User.objects.get(username=request.user.username))
 	try:
 		currentUser = User.objects.get(username=request.user.username)
 	except Exception as e:
-		print(e)
+		print(f'page error {e}')
 		currentUser = None
-	# if not User.objects.get(username=request.user.username) == False:
-	# 	currentUser = User.objects.create_user('dummy')
-	# else:
-	# 	currentUser = User.objects.get(username=request.user.username)
-	print(currentUser)
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
 	contact = Contact.objects.filter(artist=artist)
@@ -252,15 +274,29 @@ def page(request, pk):
 
 
 def text_exhibit(request, pk):
-	# artist = Artist.objects.get(pk=pk)
 	text_exhibit = TextExhibit.objects.get(pk=pk)
-	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit})
+	artist = Artist.objects.filter(textexhibit=text_exhibit)
+	user = User.objects.filter(artist=artist[0])
+	tags = Tag.objects.filter(textexhibit=text_exhibit)
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(f"text exhibit error {e}")
+		currentUser = None
+	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
 
 
 def photo_exhibit(request, pk):
-	# artist = Artist.objects.get(pk=pk)
-	photo_exhibit = PhotoExhibit.objects.filter(pk=pk)
-	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit})
+	photo_exhibit = PhotoExhibit.objects.get(pk=pk)
+	artist = Artist.objects.filter(photoexhibit=photo_exhibit)
+	user = User.objects.filter(artist=artist[0])
+	tags = Tag.objects.filter(photoexhibit=photo_exhibit)
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(f"photo exhibit error {e}")
+		currentUser = None
+	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
 
 
 # UPLOAD
@@ -316,15 +352,22 @@ def tags_index(request):
 	return render(request, 'tags/index.html', {'tags': tags})
 
 
-def tags_show(request, tag_id):
-	tag = Tag.objects.get(id=tag_id)
-	return render(request, 'tags/show.html', {'tag': tag})
+def tags_show(request, id):
+	tag = Tag.objects.get(id=id)
+	photo_exhibit = PhotoExhibit.objects.filter(tags=tag)
+	text_exhibit = TextExhibit.objects.filter(tags=tag)
+	return render(request, 'tags/show.html', {'tags': tag, 'id': id, 'photo_exhibit': photo_exhibit, 'text_exhibit': text_exhibit})
 
 
 #  salon
 def salon(request, pk):
-	artist = Artist.objects.get(pk=pk)
-	salon = Salon.objects.get(artist=artist)
+	try:
+		artist = Artist.objects.get(pk=pk)
+		salon = Salon.objects.filter(artist=artist)
+	except Exception as e:
+		print(f"salon error {e}")
+		artist = Artist.objects.get(pk=pk)
+		salon = None
 	return render(request, 'salon/salon.html', {'artist': artist, 'salon': salon})
 
 
@@ -341,23 +384,32 @@ def signup(request):
 		if form.is_valid():
 			user = form.save()
 			login(request, user)
-			return render(request, 'index.html', user)
+			return HttpResponseRedirect({'user': user})
+				# render(request, 'index.html', user)
 	else:
 		form = UserCreationForm()
 		return render(request, 'auth/signup.html', {'form': form})
 
 
-def login(request):
-	context = {"error": False}
-	if request.method == "GET":
-		return render(request, 'auth/login.html')
-	if request.method == "POST":
-		username = request.POST["username"]
-		password = request.POST["password"]
-		user = auth.authenticate(username=username, password=password)
-		if user is not None:
-			auth.login(request, user)
-			return render(request, 'index.html')
+def login_view(request):
+	# if post, then authenticate (user submitted username and password)
+	if request.method == 'POST':
+		form = AuthenticationForm(request, request.POST)
+		if form.is_valid():
+			u = form.cleaned_data['username']
+			p = form.cleaned_data['password']
+			user = authenticate(username=u, password=p)
+			if user is not None:
+				if user.is_active:
+					login(request, user)
+					return HttpResponseRedirect('/')
+				else:
+					print('The account has been disabled.')
+			else:
+				print('The username and/or password is incorrect.')
+	else:  # it was a get request so send the emtpy login form
+		form = AuthenticationForm()
+		return render(request, 'auth/login.html', {'form': form})
 
 
 def logout(request):

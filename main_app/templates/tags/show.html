@@ -1,15 +1,20 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<h1>tag details</h1>
+    <h1>{{ tags.tag }} details</h1>
 
-<div>
     <div>
-        <span>{{ tag.tag }}</span>
+        <div>
+            {% for p in photo_exhibit %}
+                <a href="/photo_exhibit/{{ p.id }}/"><img src="{{ p.image.url }}" alt="attached photos"></a><br>
+            {% endfor %}
+        {% for t in text_exhibit %}
+            <h2><a href="/text_exhibit/{{ t.id }}/">{{ t.title }}</a></h2><br>
+            {% endfor %}
+        </div>
+        <div>
+            {#        <a href="{% url 'tags_update' tag.id %}">edit</a>#}
+            {#        <a href="{% url 'tags_delete' tag.id %}">delete</a>#}
+        </div>
     </div>
-    <div>
-{#        <a href="{% url 'tags_update' tag.id %}">edit</a>#}
-{#        <a href="{% url 'tags_delete' tag.id %}">delete</a>#}
-    </div>
-</div>
 {% endblock %}

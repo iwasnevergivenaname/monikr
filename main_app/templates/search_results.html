@@ -2,16 +2,20 @@
 {% load static %}
 {% block content %}
 
-<h1>Search Results</h1>
+    <h1>search result</h1>
 
-<ul>
-  {% for artist in object_list %}
-    <li>
-        <a href='/artist/{{artist.id}}'>
-      {{ artist.monikr }}, {{ artist.artist_statement }}
-            </a>
-    </li>
-  {% endfor %}
-</ul>
+    <ul>
+    {% for o in object_list %}
+        {% if not o.tag == None %}
+        <strong>tag:</strong> <a href='/tag/{{ o.pk }}/'>{{ o.tag }}</a><br>
+        {% endif %}
+        {% if not o.monikr == None %}
+        <strong>monikr:</strong> <a href='/artist/{{ o.pk }}/'>{{ o.monikr }}</a><br>
+        {% endif %}
+        {% if not o.artist_statement == None %}
+        <strong>artist statement:</strong> <a href='/artist/{{ o.pk }}/'>{{ o.artist_statement }}</a><br>
+        {% endif %}
+        {% endfor %}
+    </ul>
 
 {% endblock %}

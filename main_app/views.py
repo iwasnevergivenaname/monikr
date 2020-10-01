@@ -202,6 +202,34 @@ class TagDelete(DeleteView):
 	success_url = '/tags'
 
 
+# Salon CRUD
+class SalonCreate(CreateView):
+	model = Salon
+	fields = ['artist', 'title', 'content']
+	success_url = '/salon'
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.author = self.request.user
+		self.object.save()
+		return HttpResponseRedirect('../' + str(self.object.pk))
+
+
+class SalonUpdate(UpdateView):
+	model = Salon
+	fields = ['artist', 'author', 'title', 'content']
+	
+	def form_valid(self, form):
+		self.object = form.save(commit=False)
+		self.object.save()
+		return HttpResponseRedirect('/salon/' + str(self.object.pk))
+
+
+class SalonDelete(DeleteView):
+	model = Salon
+	success_url = '/salon'
+
+
 # Create your views here.
 def index(request):
 	return render(request, 'index.html')
@@ -333,8 +361,13 @@ def tags_show(request, id):
 
 #  salon
 def salon(request, pk):
-	artist = Artist.objects.get(pk=pk)
-	salon = Salon.objects.get(artist=artist)
+	try:
+		artist = Artist.objects.get(pk=pk)
+		salon = Salon.objects.filter(artist=artist)
+	except Exception as e:
+		print(f"salon error {e}")
+		artist = Artist.objects.get(pk=pk)
+		salon = None
 	return render(request, 'salon/salon.html', {'artist': artist, 'salon': salon})
 
 

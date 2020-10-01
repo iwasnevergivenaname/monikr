@@ -15,11 +15,12 @@
         <a href="/" class="brand-logo"><i class="material-icons">cloud</i>monikr</a>
         <ul class="right hide-on-med-and-down">
             <li><a href="/"><i class="material-icons">home</i></a></li>
-          {% comment %} {% if user.is_authenticated %}   {% endcomment %}
-            <li><a href="/logout">logout</a></li>
-            {% comment %} {% else %} {% endcomment %}
+            {% if not user.is_authenticated %}
             <li><a href="/login">login</a></li>
             <li><a href="/signup">sign up</a></li>
+            {% else %}
+            <li><a href="/logout">logout</a></li>
+            {% endif %}
             <li><a href="/artist">view artists</a></li>
             <li><a href="/about">about monikr</a></li>
         </ul>
@@ -28,7 +29,7 @@
 <div class="block-content">
     {% block content %}
     {% endblock %}
-</div>   
+</div>
 {% block css %}
 {% endblock %}
 <script

@@ -92,7 +92,7 @@ nav {
 
 .block-content{
     min-height: 90vh;
-    padding: 0 90px 0 90px;
+    /* padding: 0 90px 0 90px; */
     /* background-image: url(https://img.pngio.com/purple-border-png-99-images-in-collection-page-3-purple-border-png-650_779.jpg); */
 }
 
@@ -115,7 +115,8 @@ nav {
     content: "";
     display: table;
     clear: both;
-  }
+}
+
   
   /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
 @media screen and (max-width: 600px) {
@@ -123,3 +124,4 @@ nav {
     width: 100%;
     }
 }
+

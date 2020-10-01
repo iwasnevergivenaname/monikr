@@ -1,0 +1,15 @@
+2020-09-30 23:36:06.872 EDT [7943] LOG:  starting PostgreSQL 12.4 on x86_64-apple-darwin16.7.0, compiled by Apple LLVM version 8.1.0 (clang-802.0.42), 64-bit
+2020-09-30 23:36:06.874 EDT [7943] LOG:  listening on IPv6 address "::1", port 5432
+2020-09-30 23:36:06.874 EDT [7943] LOG:  listening on IPv4 address "127.0.0.1", port 5432
+2020-09-30 23:36:06.874 EDT [7943] LOG:  listening on Unix socket "/tmp/.s.PGSQL.5432"
+2020-09-30 23:36:06.887 EDT [7944] LOG:  database system was shut down at 2020-09-30 23:35:14 EDT
+2020-09-30 23:36:06.890 EDT [7943] LOG:  database system is ready to accept connections
+2020-09-30 23:36:12.453 EDT [7979] FATAL:  database "monikr" does not exist
+2020-09-30 23:42:12.478 EDT [7943] LOG:  could not open file "postmaster.pid": No such file or directory
+2020-09-30 23:42:12.478 EDT [7943] LOG:  performing immediate shutdown because data directory lock file is invalid
+2020-09-30 23:42:12.478 EDT [7943] LOG:  received immediate shutdown request
+2020-09-30 23:42:12.478 EDT [7943] LOG:  could not open file "postmaster.pid": No such file or directory
+2020-09-30 23:42:12.479 EDT [7948] WARNING:  terminating connection because of crash of another server process
+2020-09-30 23:42:12.479 EDT [7948] DETAIL:  The postmaster has commanded this server process to roll back the current transaction and exit, because another server process exited abnormally and possibly corrupted shared memory.
+2020-09-30 23:42:12.479 EDT [7948] HINT:  In a moment you should be able to reconnect to the database and repeat your command.
+2020-09-30 23:42:12.483 EDT [7943] LOG:  database system is shut down

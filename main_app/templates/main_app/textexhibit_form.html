@@ -1,12 +1,13 @@
 {% extends 'base.html' %}
 {% load materializecss %}
 
-{% block content %}
-  <form action="" method="post">
-    {% csrf_token %}
-    <table>
-    {{ form.as_table }}
-    </table>
-    <input type="submit" value="send it">
-  </form>
+{% block content %} 
+  
+<form action="" method="post">
+  {% csrf_token %}
+  <table>
+  {{ form.as_table }}
+  </table>
+  <input type="submit" value="send it">
+</form>
 {% endblock %}

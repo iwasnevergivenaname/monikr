@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-
+<form action="{% url 'search_results' %}" method="get" class="search">
+     <label for="q"> 
+        <input name="q" type="text" placeholder="looking for  👀 ..." style=>
+    </label>
+</form>
     <h1>{{ tags.tag }} details</h1>
     <p style="text-align:center;">feel free to click on the art you like to see more details on it 😊</p>
 

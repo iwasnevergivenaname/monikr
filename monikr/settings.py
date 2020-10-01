@@ -33,7 +33,7 @@ else:
 # Define general behavior variables for DJANGO_HOST and all others
 if DJANGO_HOST == "production":
     DEBUG = False
-    STATIC_URL = 'https://yourappname.herokuapp.com'
+    STATIC_URL = 'https://han-monikr.herokuapp.com'
 else:
     DEBUG = True
     STATIC_URL = '/static/'
@@ -53,7 +53,7 @@ SECRET_KEY = os.getenv("SECRET_KEY") or config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['han-monikr.herokuapp.com']
 
 
 # Application definition

@@ -9,6 +9,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
 from django.db.models import Q
+from itertools import chain
 from .models import Artist
 from .models import TextExhibit
 from .models import PhotoExhibit
@@ -161,15 +162,19 @@ class HomePageView(TemplateView):
 	template_name = 'search.html'
 
 
+
 class SearchResultsView(ListView):
 	model = Artist, Tag
 	template_name = 'search_results.html'
 	
 	def get_queryset(self):
 		query = self.request.GET.get('q')
-		object_list = Artist.objects.filter(
+		tag = Tag.objects.filter(Q(tag__icontains=query))
+		artist = Artist.objects.filter(
 			Q(monikr__icontains=query) | Q(artist_statement__icontains=query)
-		)
+		).select_related()
+		object_list = chain(tag, artist)
+		print(object_list)
 		return object_list
 
 
@@ -322,9 +327,11 @@ def tags_index(request):
 	return render(request, 'tags/index.html', {'tags': tags})
 
 
-def tags_show(request, tag_id):
-	tag = Tag.objects.get(id=tag_id)
-	return render(request, 'tags/show.html', {'tag': tag})
+def tags_show(request, id):
+	tag = Tag.objects.get(id=id)
+	photo_exhibit = PhotoExhibit.objects.filter(tags=tag)
+	text_exhibit = TextExhibit.objects.filter(tags=tag)
+	return render(request, 'tags/show.html', {'tags': tag, 'id': id, 'photo_exhibit': photo_exhibit, 'text_exhibit': text_exhibit})
 
 
 #  salon

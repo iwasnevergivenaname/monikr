@@ -6,7 +6,10 @@
     <div>
         <div>
             {% for p in photo_exhibit %}
-                <img src="{{ p.image.url }}" alt="attached photos">
+                <a href="/photo_exhibit/{{ p.id }}/"><img src="{{ p.image.url }}" alt="attached photos"></a><br>
+            {% endfor %}
+        {% for t in text_exhibit %}
+            <h2><a href="/text_exhibit/{{ t.id }}/">{{ t.title }}</a></h2><br>
             {% endfor %}
         </div>
         <div>

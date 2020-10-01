@@ -73,7 +73,7 @@ class TextExhibitCreate(CreateView):
 
 class TextExhibitUpdate(UpdateView):
 	model = TextExhibit
-	fields = ['title', 'description', 'materials_used', 'for_sale', 'tags']
+	fields = ['title', 'content', 'materials_used', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -249,29 +249,26 @@ def text_exhibit(request, pk):
 	text_exhibit = TextExhibit.objects.get(pk=pk)
 	artist = Artist.objects.filter(textexhibit=text_exhibit)
 	user = User.objects.filter(artist=artist[0])
-	print('!!!!!!!!!!')
-	print(user)
+	tags = Tag.objects.filter(textexhibit=text_exhibit)
 	try:
 		currentUser = User.objects.get(username=request.user.username)
-		print('?????????????????')
-		print(currentUser)
 	except Exception as e:
 		print(f"text exhibit error {e}")
 		currentUser = None
-	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit, 'artist': artist, 'currentUser': currentUser})
+	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
 
 
 def photo_exhibit(request, pk):
 	photo_exhibit = PhotoExhibit.objects.get(pk=pk)
 	artist = Artist.objects.filter(photoexhibit=photo_exhibit)
 	user = User.objects.filter(artist=artist[0])
-
+	tags = Tag.objects.filter(photoexhibit=photo_exhibit)
 	try:
 		currentUser = User.objects.get(username=request.user.username)
 	except Exception as e:
 		print(f"photo exhibit error {e}")
 		currentUser = None
-	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit, 'artist': artist, 'currentUser': currentUser})
+	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
 
 
 # UPLOAD

@@ -4,26 +4,31 @@
     <a href='/artist/{{ artist.id }}'> go back to profile page</a>
 
     {% if text_exhibit %}
-        <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}</a> {{ text_exhibit.title }}</h2>
+        <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}:</a> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
-        <h6>{{ text_exhibit.tags }}</h6>
+         {% for t in tags %}
+            tags: <a href="/tag/{{ t.id }}/">{{ t.tag }}</a><br>
+        {% endfor %}
     {% elif photo_exhibit %}
 
-            <h2><a href="/artist/{{ photo_exhibit.artist.id }}">{{ photo_exhibit.artist }}s'</a> {{ photo_exhibit.title }} </h2>
+        <h2><a href="/artist/{{ photo_exhibit.artist.id }}">{{ photo_exhibit.artist }}:</a> {{ photo_exhibit.title }}
+        </h2>
 
-            <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
-                 src="{{ photo_exhibit.image.url }}"
-                 alt="uploaded image"><br>
-            <p>description: {{ photo_exhibit.description }}</p>
-            <p>materials used: {{ photo_exhibit.materials_used }}</p>
-            <p>tags: {{ photo_exhibit.tags }}</p>
-
+        <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
+             src="{{ photo_exhibit.image.url }}"
+             alt="uploaded image"><br>
+        <p>description: {{ photo_exhibit.description }}</p>
+        <p>materials used: {{ photo_exhibit.materials_used }}</p>
+        {#            <p>tags: {{ tags }}</p>#}
+        {% for t in tags %}
+            tags: <a href="/tag/{{ t.id }}/">{{ t.tag }}</a><br>
+        {% endfor %}
     {% endif %}
 
-        {% if currentUser.username == user.username %}
-            <a href="update/">edit exhibit</a>
-            <a href="delete/">delete exhibit</a>
-        {% endif %}
+    {% if currentUser.username == user.username %}
+        <a href="update/">edit exhibit</a>
+        <a href="delete/">delete exhibit</a>
+    {% endif %}
 
 {% endblock %}

@@ -32,7 +32,7 @@ from .forms import PhotoForm, PhotoDirectForm, PhotoUnsignedDirectForm
 # ARTIST CRUD
 class ArtistCreate(CreateView):
 	model = Artist
-	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'icon', 'bg_color']
+	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'iconphoto', 'bg_color']
 	success_url = '/artist'
 	
 	def form_valid(self, form):
@@ -44,7 +44,7 @@ class ArtistCreate(CreateView):
 
 class ArtistUpdate(UpdateView):
 	model = Artist
-	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'icon', 'bg_color']
+	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'iconphoto', 'bg_color']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)

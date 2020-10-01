@@ -2,7 +2,7 @@
 {% load cloudinary %}
 
 {% block content %}
-    {% if not not currentUser == True  %}
+    {% if not not currentUser == True %}
         hi
     {% endif %}
 
@@ -39,8 +39,8 @@
                 {% for p in photo_exhibit %}
 
                     <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong><br>
-                    <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"></a><br>
-                    {% empty %}
+                        <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"></a><br>
+                {% empty %}
                     <p style="text-align:center;margin-left:auto; margin-right:auto;">
 
                 {% endfor %}
@@ -48,7 +48,7 @@
             <div class="column">
                 <h5>contact:</h5>
                 {% for e in contact %}
-                    {{ e.website }} 
+                    {{ e.website }}
                 {% endfor %}
                 <a href="contact/{{ artist.id }}/update">update contact</a>
                 <h5>commission: </h5>
@@ -68,11 +68,11 @@
             </div>
         </div>
 
-{#    {% if photo_exhibit.all == None %}#}
+        {#    {% if photo_exhibit.all == None %}#}
         <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
-{#        {% else %}#}
-{##}
-{#    {% endif %}#}
+        {#        {% else %}#}
+        {##}
+        {#    {% endif %}#}
 
     </div>
 {% endblock %}

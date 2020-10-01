@@ -15,6 +15,7 @@ psycopg2 = "*"
 whitenoise = "*"
 python-decouple = "*"
 cloudinary = "*"
+django-materializecss-form = "*"
 
 [requires]
 python_version = "3.8"

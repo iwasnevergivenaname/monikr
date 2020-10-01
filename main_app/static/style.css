@@ -52,16 +52,16 @@ h5 {
 }
 
 input:hover {
-    color: rgb(238, 141, 173);
+    color: rgb(180, 35, 84);
     background-color: rgb(117, 42, 192);
 }
   
 input{
-    background-color: pink;
+    background-color: rgb(204, 43, 70);
 }
 
 a:hover{
-    color: pink;
+    color: rgb(214, 51, 78);
 }
 
 .about-title{

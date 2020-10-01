@@ -6,7 +6,7 @@
         hi
     {% endif %}
 
-    <a href="/artist"> <- return to search results</a>
+    {% comment %} <a href="../"> <- return to search results</a> {% endcomment %}
     <div style="background: {{ artist.bg_color }}">
 
         <h1><em>{{ artist.monikr }}</em></h1><br>
@@ -62,7 +62,7 @@
                         <a href="commission/{{ artist.id }}/update">update commissions</a><br>
 
                         <a href="update/">edit profile</a><br>
-                        <a href="contact/{{ artist.id }}/update">update contact</a>
+                        <a href="contact/{{ artist.id }}/update">update contact</a> |
                         <a href="../../text_exhibit/create/">upload a text post</a> |
                         <a href="../../photo_exhibit/upload/">upload a photo</a>
                     {% endif %}

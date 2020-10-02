@@ -16,7 +16,7 @@ import os
 import socket
 import psycopg2
 import dj_database_url
-from decouple import config
+# from decouple import config
 
 DATABASE_URL = os.environ['DATABASE_URL']
 conn = psycopg2.connect(DATABASE_URL, sslmode='require')

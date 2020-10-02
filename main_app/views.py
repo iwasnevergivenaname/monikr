@@ -275,7 +275,10 @@ def page(request, pk):
 		currentUser = None
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
-	icon = Icon.objects.get(artist=artist)
+	try:
+		icon = Icon.objects.get(artist=artist)
+	except Exception as e:
+		icon = None
 	contact = Contact.objects.filter(artist=artist)
 	commission = Commission.objects.filter(artist=artist)
 	return render(request, 'artists/page.html',

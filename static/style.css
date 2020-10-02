@@ -1,0 +1,140 @@
+/* after you are done with a branch, after it gets approved and merged, you have to delete feature/css
+bc you dont want to have oudated code in it. deleteing it and redoing the branch will. have your
+up to date code */
+h1 {
+    text-align: center;
+    color: rgb(90, 88, 88);
+}
+
+h2 {
+    text-align: center;
+    background-image: linear-gradient(to left, rgb(235, 211, 114), rgb(134, 133, 48), rgb(231, 124, 62), rgb(221, 71, 44));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+  
+h3, 
+h4 {
+    text-align: center;
+    color: rgb(121, 121, 218); 
+    font-family: helvetica, arial;
+}
+
+h5 {
+    text-align: center;
+    font-size: 2.92rem;
+}
+
+.carousel {
+    position: absolute;
+    margin-top: -5.5%;  
+}
+
+.search {
+    /* border: solid; */
+    padding: 0 80px 0 80px;
+}
+  
+.outer-grid {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0 4px;
+}
+.inner-grid {
+    flex: 25%;
+    max-width: 25%;
+    padding: 0 4px;
+}
+.inner-grid img {
+    margin-top: 8px;
+    width: 100%;
+    padding: 10px;
+}
+
+input:hover {
+    color: rgb(180, 35, 84);
+    background-color: rgb(117, 42, 192);
+}
+  
+input{
+    background-color: rgb(204, 43, 70);
+}
+
+a:hover{
+    color: rgb(214, 51, 78);
+}
+
+.about-title{
+    color: purple;
+    font-size: 60px;
+}
+  
+.base-footer, 
+.homepage,
+#about-body {
+    text-align: center;
+}
+  
+.about{
+    text-align: justify;
+    padding: 0 80px 0 80px;
+}
+  
+footer{
+    height: 15vh;
+    width: 100%;
+    background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
+}
+  
+nav {
+    background: linear-gradient(to right, rgb(224, 153, 165), rgb(243, 167, 243), rgb(206, 73, 206), grey); 
+}
+
+.block-content{
+    min-height: 90vh;
+    padding: 0 90px 0 90px;
+    /* background-image: url(https://img.pngio.com/purple-border-png-99-images-in-collection-page-3-purple-border-png-650_779.jpg); */
+}
+
+.artists-text {
+    background-image: linear-gradient(to left, rgb(235, 114, 235), violet, blue, blue);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Create three equal columns that floats next to each other */
+.column {
+    float: left;
+    width: 33.33%;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+  
+  /* Responsive layout - makes the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+.column {
+    width: 100%;
+    }
+}
+
+.block-content{
+    text-align: justify;
+}
+
+.about-title {
+    text-align: center;
+}
+
+h6 {
+    text-align: justify;
+    color: violet;
+    font-size: 2.5rem;    
+}

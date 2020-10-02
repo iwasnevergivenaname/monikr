@@ -7,6 +7,7 @@
 
   <form action="" method="POST">
     {% csrf_token %}
-    <input type="submit" value="i'm sure">
+    <button class="btn btn-primary pink darken-4" type="submit">i'm sure<i class="material-icons right">delete_forever</i></button>
+    {% comment %} <input type="submit" value="i'm sure"> {% endcomment %}
   </form>
 {% endblock %}

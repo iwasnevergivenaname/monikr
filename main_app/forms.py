@@ -1,4 +1,5 @@
 from django.forms import ModelForm
+from django import forms
 
 from cloudinary.forms import CloudinaryJsFileField, CloudinaryUnsignedJsFileField
 # Next two lines are only used for generating the upload preset sample name
@@ -12,6 +13,7 @@ class PhotoForm(ModelForm):
     class Meta:
         model = PhotoExhibit
         fields = '__all__'
+
 
 class PhotoDirectForm(PhotoForm):
     image = CloudinaryJsFileField()

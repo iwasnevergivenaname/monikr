@@ -15,8 +15,8 @@ from pathlib import Path
 import os
 import socket
 import psycopg2
-import dj_database_url
-from decouple import config
+# import dj_database_url
+# from decouple import config
 
 # DATABASE_URL = os.environ['DATABASE_URL']
 # conn = psycopg2.connect(DATABASE_URL, sslmode='require')
@@ -31,16 +31,20 @@ else:
 # If host doesn't match, assume it's a development server, set DJANGO_HOST = "development"
     DJANGO_HOST = "development"
 # Define general behavior variables for DJANGO_HOST and all others
-if DJANGO_HOST == "production":
-    DEBUG = False
-    STATIC_URL = 'https://han-monikr.herokuapp.com'
-else:
-    DEBUG = True
-    STATIC_URL = '/static/'
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+if DJANGO_HOST == "production":
+    DEBUG = False
+    STATIC_URL = 'https://han-monikr.herokuapp.com/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+else:
+    DEBUG = True
+    STATIC_URL = '/static/'
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+
+
 
 
 

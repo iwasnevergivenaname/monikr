@@ -1,4 +1,6 @@
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 from . import views
 
 urlpatterns = [
@@ -33,7 +35,7 @@ urlpatterns = [
     path('artist/<int:pk>/salon/', views.salon, name='salon'),
     path('artist/<int:pk>/salon/create/', views.SalonCreate.as_view(), name='salon_create'),
     path('artist/<int:pk>/salon/<id>/', views.salon_post, name='salon_post'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 #  profile url should be artist/:moniker
 

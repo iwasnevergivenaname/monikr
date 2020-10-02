@@ -16,14 +16,16 @@
         <ul class="right hide-on-med-and-down">
             <li><a href="/"><i class="material-icons">home</i></a></li>
             {% if not user.is_authenticated %}
-            <li><a href="/login">login</a></li>
-            <li><a href="/signup">sign up</a></li>
+            <li><a href="{% url 'login' %}">login</a></li>
+            <li><a href="{% url 'signup' %}">sign up</a></li>
             {% else %}
-            <li><a href="/logout">logout</a></li>
+            <li><a href="{% url 'logout' %}">logout</a></li>
+            <li><a href="{% url 'profile' user.username %}">{{ user.username }}</a></li>
             {% endif %}
-            <li><a href="/artist">view artists</a></li>
-            <li><a href="/about">about monikr</a></li>
+            <li><a href="{% url 'artist_index' %}">view artists</a></li>
+            <li><a href="{% url 'about' %}">about monikr</a></li>
         </ul>
+   
     </div>
 </nav>
 <div class="block-content">

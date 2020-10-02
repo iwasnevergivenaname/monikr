@@ -55,6 +55,7 @@ credits to w3schools for helping me out creating this.
 ## to run
 make sure you have django installed
 fork and clone this repo
+run `pip3 install  django-materializecss-form` <br>
 run `pip3 install psycopg2` <br>
 then `createdb monikr` <br>
 run these next 2 lines of code after any database changes you have <br>
@@ -63,11 +64,11 @@ and `python3 manage.py migrate`
 if you add any new models, to see them on the admin page, you must
 import and register them in admin.py
 ## User Stories
-‣ as a user i want to come to a home page of carosoling pieces of art
-‣ as a user i can search from any number of fields, like name, medium, location
-‣ as a user i want my results to be returned in a visually pleasing manner
-‣ as a user i can click on any artist to see more about them
-‣ as a user i can click on the art displayed on their profile
+‣ as a user i want to come to a home page of carosoling pieces of art <br>
+‣ as a user i can search from any number of fields, like name, medium, location <br>
+‣ as a user i want my results to be returned in a visually pleasing manner <br>
+‣ as a user i can click on any artist to see more about them <br>
+‣ as a user i can click on the art displayed on their profile <br>
 ## routes
 | path | description |
 | ---- | ------ |
@@ -92,3 +93,4 @@ fully works.
 3. Another hurdle I also faced was implementing materialize css onto our forms. At first, I thought I was using the correct scripts and inputting the correct links needed to get the forms working correctly for the forms (since we had selective for some of them) but realized that I actually was missing some. After realizing my mistake, I was able to get the forms 90% working. The  next hurdle was getting the boolean to be recognized on the form.
 ## Future implementations for monikr
 - revisit footer and make it work for our website :blush:
+- adding a drop down to search bar with colors

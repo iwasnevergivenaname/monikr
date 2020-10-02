@@ -480,3 +480,6 @@ def login_view(request):
 def logout(request):
 	auth.logout(request)
 	return render(request, 'index.html')
+
+def error404(request, path):
+    return render(request, '500.html', status=500)

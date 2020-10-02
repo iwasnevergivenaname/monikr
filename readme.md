@@ -1,5 +1,8 @@
 # welcome to monikr!
 our website is aimed for indie artists who wish to showcase their original art pieces only and for users who are in interested in viewing their art or seeking for an artists to paint for their next big print.
+
+[our google doc](https://docs.google.com/document/d/11rEhVdeOcIyXeR_AbS4O5TNEu5aYnJySWabA02gg1sw/edit?usp=sharing)
+[our deployed app](https://han-monikr.herokuapp.com/)
 ## General Approach we took
 Han and Alpha had decided to split the backend and frontend between the two. One person tackles the backend while the other person starts designing the website to make it move fast and smoothly without few conflicts (if any were to occur).
 Alpha: Frontend -

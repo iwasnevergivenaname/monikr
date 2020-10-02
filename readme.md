@@ -56,7 +56,7 @@ credits to w3schools for helping me out creating this.
 Backend - 
 
 from views.py
-```def page(request, pk):
+```python def page(request, pk):
 	artist = Artist.objects.get(pk=pk)
 	user = User.objects.filter(artist=artist)
 	try:
@@ -80,7 +80,7 @@ from views.py
 
 this was difficult for me, Han, to originally get the correct page auth. The User model is connected to both the Artist and the regular user, and user variable is connected to the artist page. i needed to make sure that a random regular user couldn't edit an Artist page, so i had to store the current user username, which i then checked against the artist user name in my page.html
 
-``` {% if currentUser.username == u.username %}```
+```html {% if currentUser.username == u.username %}```
 
 ## to run
 make sure you have django installed

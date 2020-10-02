@@ -6,6 +6,7 @@
     <table>
     {{ form.as_table }}
     </table>
-    <input type="submit" value="send it">
+    {% comment %} <input type="submit" value="send it"> {% endcomment %}
+    <button class="btn btn-primary pink darken-4" type="submit">update<i class="material-icons right">update</i></button>
   </form>
 {% endblock %}

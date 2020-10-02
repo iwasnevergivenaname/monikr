@@ -19,6 +19,7 @@
             <li><a href="/signup">sign up</a></li>
             {% else %}
             <li><a href="/logout">logout</a></li>
+            <li><a href="{% url 'profile' user.username %}">{{ user.username }}</a></li>
             {% endif %}
             <li><a href="/artist">view artists</a></li>
             <li><a href="/about">about monikr</a></li>

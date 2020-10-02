@@ -8,6 +8,7 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.http import HttpResponseRedirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from django import forms
 from django.db.models import Q
 from itertools import chain
 from .models import Artist
@@ -343,7 +344,9 @@ def upload(request):
 		# Only backend upload should be posting here
 		form = PhotoForm(request.POST, request.FILES)
 		context['posted'] = form.instance
+		#print(form)
 		if form.is_valid():
+			print (form.cleaned_data)
 			# Uploads image and creates a model instance for it
 			form.save()
 	return render(request, 'upload.html', context)

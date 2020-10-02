@@ -10,7 +10,8 @@
     <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ backend_form }}
-      <input type="submit" value="upload">
+      <button class="btn btn-primary pink darken-4" type="submit">Upload<i class="material-icons right">cloud_upload</i></button>
+      {% comment %} <input type="submit" value="upload"> {% endcomment %}
     </form>
     {% if posted %}
       <div class="results">
@@ -26,5 +27,4 @@
       </div>
     {% endif %}
   </div>
-
 {% endblock %}

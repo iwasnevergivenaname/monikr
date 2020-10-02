@@ -80,7 +80,7 @@ from views.py
 
 this was difficult for me, Han, to originally get the correct page auth. The User model is connected to both the Artist and the regular user, and user variable is connected to the artist page. i needed to make sure that a random regular user couldn't edit an Artist page, so i had to store the current user username, which i then checked against the artist user name in my page.html
 
-```html {% if currentUser.username == u.username %}```
+```{% if currentUser.username == u.username %}```
 
 ## to run
 make sure you have django installed

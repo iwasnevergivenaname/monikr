@@ -52,6 +52,36 @@ This is also responsive which made everything work even better. The photos are r
 ```
 credits to w3schools for helping me out creating this.
 4. For the salon pages, I had to create their own html boilerpoint because we wanted to incorporate a banner underneath the nav bar, but there was a div that was making the banner and the nav bar have a white space. Once I figured how to implement the styling and html coding needed to make the banner look nice, everything else became easier in terms of adding the information needed for the page.  Besides these main pages, the forms were easier to create and style as well as the search bar and the lists to view artists and tags.
+
+Backend - 
+
+from views.py
+```def page(request, pk):
+	artist = Artist.objects.get(pk=pk)
+	user = User.objects.filter(artist=artist)
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(f'page error {e}')
+		currentUser = None
+	text_exhibit = TextExhibit.objects.filter(artist=artist)
+	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
+	try:
+		icon = Icon.objects.get(artist=artist)
+	except Exception as e:
+		icon = None
+	contact = Contact.objects.filter(artist=artist)
+	commission = Commission.objects.filter(artist=artist)
+	return render(request, 'artists/page.html',
+	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
+	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser, 'icon': icon
+	               })
+```
+
+this was difficult for me, Han, to originally get the correct page auth. The User model is connected to both the Artist and the regular user, and user variable is connected to the artist page. i needed to make sure that a random regular user couldn't edit an Artist page, so i had to store the current user username, which i then checked against the artist user name in my page.html
+
+``` {% if currentUser.username == u.username %}```
+
 ## to run
 make sure you have django installed
 fork and clone this repo

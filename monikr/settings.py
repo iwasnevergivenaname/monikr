@@ -18,8 +18,8 @@ import psycopg2
 import dj_database_url
 from decouple import config
 
-# DATABASE_URL = os.environ['DATABASE_URL']
-# conn = psycopg2.connect(DATABASE_URL, sslmode='require')
+DATABASE_URL = os.environ['DATABASE_URL']
+conn = psycopg2.connect(DATABASE_URL, sslmode='require')
 
 # If the host name starts with 'live', DJANGO_HOST = "production"
 if socket.gethostname().startswith('live'):
@@ -48,11 +48,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = os.getenv("SECRET_KEY") or config(process.env.SECRET_KEY)
-SECRET_KEY = 'tq=-(enp)ja2o5oxqi^-*mc@oli#z$@$$dx!8ey2v6msku#vrq'
+SECRET_KEY = os.getenv("SECRET_KEY") or config(process.env.SECRET_KEY)
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['127.0.0.1', 'han-monikr.herokuapp.com']
 
@@ -107,12 +106,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'monikr.wsgi.application'
 
 # cloudinary
-# CLOUDINARY = os.getenv("CLOUDINARY")
-CLOUDINARY = {
-  'cloud_name': 'dvviaroqm',
-  'api_key': '815426668381665',
-  'api_secret': '3stI4LUzbwUr9BMiEnmAnYMRpAU',
-}
+CLOUDINARY = os.getenv("CLOUDINARY")
+
 
 
 # Database
@@ -126,7 +121,7 @@ DATABASES = {
 }
 
 #  production
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

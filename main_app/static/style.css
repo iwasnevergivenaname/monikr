@@ -125,3 +125,16 @@ nav {
     }
 }
 
+.block-content{
+    text-align: justify;
+}
+
+.about-title {
+    text-align: center;
+}
+
+h6 {
+    text-align: justify;
+    color: violet;
+    font-size: 2.5rem;    
+}

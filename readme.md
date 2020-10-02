@@ -131,3 +131,6 @@ fully works.
 ## Future implementations for monikr
 - revisit footer and make it work for our website :blush:
 - adding a drop down to search bar with colors
+- attempt to fix a boolean issue we had on our form. for some reason it gets cut out whenever we tried to have it show up on our page 
+- having an error pop up in the login when a user inputs wrong password. 
+- attempting to fix upload input and change it to a materilize upload input so it looks nicer. 

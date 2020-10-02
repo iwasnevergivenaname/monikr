@@ -1,29 +1,30 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-  <form action="{% url 'search_results' %}" method="get" class="search">
-      <label for="q"> 
-          <input name="q" type="text" placeholder="looking for  👀 ..." style=>
-      </label>
-  </form>
-  <h2 class="artists-text">artists</h2>   
+    <form action="{% url 'search_results' %}" method="get" class="search">
+        <label for="q">
+            <input name="q" type="text" placeholder="looking for  👀 ..." style=>
+        </label>
+    </form>
+    <h2 class="artists-text">artists</h2>
     wish to see yourself here? 👉🏼 <a href="https://forms.gle/bX4HH3mRheTvhcao9">apply now!</a> 👈🏻</br>
- 
-  {% for artist in artists %}
-    <ul class="collection">
-      <li class="collection-item avatar">
-        <img src="{{ artist.icon }}" alt="" class="circle">
-        <span class="title"> <a href='/artist/{{artist.id}}'>
+
+    {% for artist in artists %}
+        <ul class="collection">
+            <li class="collection-item avatar">
+{#                <img src="{{ artist.iconphoto }}" alt="" class="circle">#}
+                <span class="title"> <a href='/artist/{{ artist.id }}'>
         <p>Name: {{ artist.monikr }}</p>
         </a></span>
-        <p>{{ artist.pronouns }}<br>
-          {{ artist.artist_statement }}
-        </p>
-        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>
-      </li>
-    </ul>
+                <p>{{ artist.pronouns }}<br>
+                    {{ artist.artist_statement }}
+
+                </p>
+                {#        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>#}
+            </li>
+        </ul>
     {% endfor %}
-    {% endblock %}
+{% endblock %}
 
 
 
@@ -32,7 +33,7 @@
 
 
 
-      {% comment %} <a href='/user/{{artist.user.username}}'>
+{% comment %} <a href='/user/{{artist.user.username}}'>
         <p>{{artist.user.username}}</p>
       </a> {% endcomment %}
 {#        {% if cat.age > 0 %}#}

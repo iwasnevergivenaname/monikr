@@ -112,7 +112,7 @@ class Icon(models.Model):
             public_id = self.image.public_id
         except AttributeError:
             public_id = ''
-        return "Photo <%s:%s>" % (self.title, public_id)
+        return "Photo <%s:%s>" % (self.artist, public_id)
     
 # class SalonPost(models.Model):
 

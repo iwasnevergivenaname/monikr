@@ -17,6 +17,7 @@ from .models import Tag
 from .models import Contact
 from .models import Commission
 from .models import Salon
+from .models import Icon
 from django.contrib.auth.models import User
 import json
 
@@ -26,7 +27,7 @@ from cloudinary.forms import cl_init_js_callbacks
 from django.http import HttpResponse
 from django.shortcuts import render
 
-from .forms import PhotoForm, PhotoDirectForm, PhotoUnsignedDirectForm
+from .forms import PhotoForm, PhotoDirectForm, PhotoUnsignedDirectForm, IconForm, IconDirectForm, IconUnsignedDirectForm
 
 
 # ARTIST CRUD
@@ -83,7 +84,7 @@ class TextExhibitUpdate(UpdateView):
 
 class TextExhibitDelete(DeleteView):
 	model = TextExhibit
-	success_url = '/artist'
+	success_url = '/artist/'
 
 
 class PhotoExhibitUpdate(UpdateView):
@@ -98,7 +99,7 @@ class PhotoExhibitUpdate(UpdateView):
 
 class PhotoExhibitDelete(DeleteView):
 	model = PhotoExhibit
-	success_url = '/artist'
+	success_url = ''
 
 
 # COMMISSION CRUD
@@ -241,6 +242,14 @@ def about(request):
 
 def artist_index(request):
 	artists = Artist.objects.all()
+	# id = artists
+	# print(id)
+	# icon = Icon.objects.get(artist=artists[id])
+	# print('!!!!!!!!!')
+	# print(icon.image.url)
+	# for i in icon:
+	# 	print('???????')
+	# 	print(i)
 	return render(request, 'artists/index.html', {'artists': artists})
 
 
@@ -266,11 +275,14 @@ def page(request, pk):
 		currentUser = None
 	text_exhibit = TextExhibit.objects.filter(artist=artist)
 	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
+	icon = Icon.objects.get(artist=artist)
 	contact = Contact.objects.filter(artist=artist)
 	commission = Commission.objects.filter(artist=artist)
 	return render(request, 'artists/page.html',
 	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
-	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser})
+	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser
+		              , 'icon': icon
+	               })
 
 
 def text_exhibit(request, pk):
@@ -345,6 +357,51 @@ def direct_upload_complete(request):
 	
 	return HttpResponse(json.dumps(ret), content_type='application/json')
 
+
+def icon_upload(request):
+	unsigned = request.GET.get("unsigned") == "true"
+	
+	if (unsigned):
+		# For the sake of simplicity of the sample site, we generate the preset on the fly.
+		# It only needs to be created once, in advance.
+		try:
+			api.upload_preset(IconUnsignedDirectForm.upload_preset_name)
+		except api.NotFound:
+			api.create_upload_preset(name=IconUnsignedDirectForm.upload_preset_name, unsigned=True, folder="preset_folder")
+	
+	direct_form = IconUnsignedDirectForm() if unsigned else IconDirectForm()
+	context = dict(
+		# Form demonstrating backend upload
+		backend_form=IconForm(),
+		# Form demonstrating direct upload
+		direct_form=direct_form,
+		# Should the upload form be unsigned
+		unsigned=unsigned,
+	)
+	# When using direct upload - the following call is necessary to update the
+	# form's callback url
+	cl_init_js_callbacks(context['direct_form'], request)
+	
+	if request.method == 'POST':
+		# Only backend upload should be posting here
+		form = IconForm(request.POST, request.FILES)
+		context['posted'] = form.instance
+		if form.is_valid():
+			# Uploads image and creates a model instance for it
+			form.save()
+	return render(request, 'upload_icon.html', context)
+
+
+def icon_direct_upload_complete(request):
+	form = IconDirectForm(request.POST)
+	if form.is_valid():
+		# Create a model instance for uploaded image using the provided data
+		form.save()
+		ret = dict(photo_id=form.instance.id)
+	else:
+		ret = dict(errors=form.errors)
+	
+	return HttpResponse(json.dumps(ret), content_type='application/json')
 
 #  TAGS
 def tags_index(request):

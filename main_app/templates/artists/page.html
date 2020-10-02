@@ -13,14 +13,7 @@
         <h6 style="text-align: center">{{ artist.artist_statement }}</h6>
         <div class="row">
             <div class="column">
-                <img src="{{ artist.iconphoto }}" alt="" style="height:190px"><br>
-                {#    cloudinary.utils.cloudinary_url("iKdy0bn_wm1mhp",#}
-                {#                                width = 90,#}
-                {#                                height = 90,#}
-                {#                                crop = "thumb",#}
-                {#                                gravity = "face")#}
-                {#    {% cloudinary image width=120 height=120 crop="fill" %}#}
-                {#    <img src="https://res.cloudinary.com/dvviaroqm/image/upload/v1601239146/iKdy0bn_wm1mhp.jpg" alt="icon" />#}
+                <img src="http://res.cloudinary.com/dvviaroqm/image/upload/c_thumb,w_200,c_fill,ar_1:1,g_auto,r_max/v1601598968/{{ icon.image }}.png" alt="" style="height:190px"><br>
                 {{ artist.pronouns }}<br>
                 {{ artist.medium }}<br>
                 <a href="salon">{{ artist.monikr }}'s salon</a>
@@ -64,7 +57,7 @@
                         <a href="update/">edit profile</a><br>
                         <a href="contact/{{ artist.id }}/update">update contact</a> |
                         <a href="../../text_exhibit/create/">upload a text post</a> |
-                        <a href="../../photo_exhibit/upload/">upload a photo</a>
+                        <a href="../../photo_exhibit/upload/">upload a photo</a> | <a href="/icon/upload/">upload icon</a>
                     {% endif %}
                 {% endfor %}
             </div>

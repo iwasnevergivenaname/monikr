@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{#{% extends 'base.html' %}#}
 {% load materializecss %}
 {% load cloudinary %}
 {% load static %}
@@ -7,13 +7,14 @@
      <!-- A standard form for sending the image data to your server -->
   <div id='backend_upload'>
     <h1>upload an icon</h1>
-    <form action="{% url 'upload' %}" method="post" enctype="multipart/form-data">
+    <form action="{% url 'icon_upload' %}" method="post" enctype="multipart/form-data">
       {% csrf_token %}
       {{ backend_form }}
       <input type="submit" value="upload">
     </form>
     {% if posted %}
       <div class="results">
+          <a href="../">to profile</a>
         {% if posted.errors %}
           Errors: {{ posted.errors }}
         {% else %}

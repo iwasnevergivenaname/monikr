@@ -1,5 +1,8 @@
 # welcome to monikr!
 our website is aimed for indie artists who wish to showcase their original art pieces only and for users who are in interested in viewing their art or seeking for an artists to paint for their next big print.
+
+[here's our deployed app](https://han-monikr.herokuapp.com/) <br>
+[link to our pitch deck](https://docs.google.com/document/d/11rEhVdeOcIyXeR_AbS4O5TNEu5aYnJySWabA02gg1sw/edit?usp=sharing)
 ## General Approach we took
 Han and Alpha had decided to split the backend and frontend between the two. One person tackles the backend while the other person starts designing the website to make it move fast and smoothly without few conflicts (if any were to occur).
 Alpha: Frontend -
@@ -95,6 +98,30 @@ Alpha - Frontend:
 ```
 fully works.
 3. Another hurdle I also faced was implementing materialize css onto our forms. At first, I thought I was using the correct scripts and inputting the correct links needed to get the forms working correctly for the forms (since we had selective for some of them) but realized that I actually was missing some. After realizing my mistake, I was able to get the forms 90% working. The  next hurdle was getting the boolean to be recognized on the form.
+<br><br>Backend -
+the hardest part for me, Han, working on the backend was chekcing the user's auth for every page to make sure they did not have access to edit pages
+```python
+def page(request, pk):
+	artist = Artist.objects.get(pk=pk)
+	user = User.objects.filter(artist=artist)
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(f'page error {e}')
+		currentUser = None
+	text_exhibit = TextExhibit.objects.filter(artist=artist)
+	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
+	try:
+		icon = Icon.objects.get(artist=artist)
+	except Exception as e:
+		icon = None
+	contact = Contact.objects.filter(artist=artist)
+	commission = Commission.objects.filter(artist=artist)
+	return render(request, 'artists/page.html',
+	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
+	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser, 'icon': icon })
+```
 ## Future implementations for monikr
 - revisit footer and make it work for our website :blush:
 - adding a drop down to search bar with colors
+- observer option to add comments on salon posts

@@ -63,6 +63,10 @@ run these next 2 lines of code after any database changes you have <br>
 and `python3 manage.py migrate`
 if you add any new models, to see them on the admin page, you must
 import and register them in admin.py
+## artist profiles
+![timothy page](https://i.imgur.com/8OBAXP5.png)
+![sleepy page](https://i.imgur.com/XbVmxZk.png)
+![boy bloom](https://i.imgur.com/qBh51bz.png)
 ## User Stories
 ‣ as a user i want to come to a home page of carosoling pieces of art <br>
 ‣ as a user i can search from any number of fields, like name, medium, location <br>

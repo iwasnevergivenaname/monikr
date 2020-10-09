@@ -53,7 +53,7 @@ else:
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # SECRET_KEY = os.getenv("SECRET_KEY") or config(process.env.SECRET_KEY)
-# SECRET_KEY = 'tq=-(enp)ja2o5oxqi^-*mc@oli#z$@$$dx!8ey2v6msku#vrq'
+SECRET_KEY = 'tq=-(enp)ja2o5oxqi^-*mc@oli#z$@$$dx!8ey2v6msku#vrq'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False

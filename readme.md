@@ -1,8 +1,10 @@
 # welcome to monikr!
 our website is aimed for indie artists who wish to showcase their original art pieces only and for users who are in interested in viewing their art or seeking for an artists to paint for their next big print.
 
-[here's our deployed app](https://han-monikr.herokuapp.com/) <br>
-[link to our pitch deck](https://docs.google.com/document/d/11rEhVdeOcIyXeR_AbS4O5TNEu5aYnJySWabA02gg1sw/edit?usp=sharing)
+
+[our google doc](https://docs.google.com/document/d/11rEhVdeOcIyXeR_AbS4O5TNEu5aYnJySWabA02gg1sw/edit?usp=sharing) & 
+[our deployed app](https://han-monikr.herokuapp.com/)
+
 ## General Approach we took
 Han and Alpha had decided to split the backend and frontend between the two. One person tackles the backend while the other person starts designing the website to make it move fast and smoothly without few conflicts (if any were to occur).
 Alpha: Frontend -
@@ -55,6 +57,36 @@ This is also responsive which made everything work even better. The photos are r
 ```
 credits to w3schools for helping me out creating this.
 4. For the salon pages, I had to create their own html boilerpoint because we wanted to incorporate a banner underneath the nav bar, but there was a div that was making the banner and the nav bar have a white space. Once I figured how to implement the styling and html coding needed to make the banner look nice, everything else became easier in terms of adding the information needed for the page.  Besides these main pages, the forms were easier to create and style as well as the search bar and the lists to view artists and tags.
+
+Backend - 
+
+from views.py
+```python def page(request, pk):
+	artist = Artist.objects.get(pk=pk)
+	user = User.objects.filter(artist=artist)
+	try:
+		currentUser = User.objects.get(username=request.user.username)
+	except Exception as e:
+		print(f'page error {e}')
+		currentUser = None
+	text_exhibit = TextExhibit.objects.filter(artist=artist)
+	photo_exhibit = PhotoExhibit.objects.filter(artist=artist)
+	try:
+		icon = Icon.objects.get(artist=artist)
+	except Exception as e:
+		icon = None
+	contact = Contact.objects.filter(artist=artist)
+	commission = Commission.objects.filter(artist=artist)
+	return render(request, 'artists/page.html',
+	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
+	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser, 'icon': icon
+	               })
+```
+
+this was difficult for me, Han, to originally get the correct page auth. The User model is connected to both the Artist and the regular user, and user variable is connected to the artist page. i needed to make sure that a random regular user couldn't edit an Artist page, so i had to store the current user username, which i then checked against the artist user name in my page.html
+
+```{% if currentUser.username == u.username %}```
+
 ## to run
 make sure you have django installed
 fork and clone this repo
@@ -124,4 +156,10 @@ def page(request, pk):
 ## Future implementations for monikr
 - revisit footer and make it work for our website :blush:
 - adding a drop down to search bar with colors
+<<<<<<< HEAD
 - observer option to add comments on salon posts
+=======
+- attempt to fix a boolean issue we had on our form. for some reason it gets cut out whenever we tried to have it show up on our page 
+- having an error pop up in the login when a user inputs wrong password. 
+- attempting to fix upload input and change it to a materilize upload input so it looks nicer. 
+>>>>>>> 73ca5610103cfdab74b778056502cc83395469dc

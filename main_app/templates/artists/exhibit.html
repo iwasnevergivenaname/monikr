@@ -6,7 +6,9 @@
     {% if text_exhibit %}
         <h2><a href="/artist/{{ text_exhibit.artist.id }}">{{ text_exhibit.artist }}:</a> {{ text_exhibit.title }}</h2>
         <p>{{ text_exhibit.content }}</p>
+        <p><a href="{{ text_exhibit.link }}">{{ text_exhibit.link_title }}</a></p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
+        <p>{{ text_exhibit.create_time }}</p>
          {% for t in tags %}
             tags: <a href="/tag/{{ t.id }}/">{{ t.tag }}</a><br>
         {% endfor %}
@@ -19,8 +21,9 @@
              src="{{ photo_exhibit.image.url }}"
              alt="uploaded image"><br>
         <p>description: {{ photo_exhibit.description }}</p>
+        <p><a href="{{ photo_exhibit.link }}">{{ photo_exhibit.link_title }}</a></p>
         <p>materials used: {{ photo_exhibit.materials_used }}</p>
-        {#            <p>tags: {{ tags }}</p>#}
+        <p>{{ photo_exhibit.create_time }}</p>
         {% for t in tags %}
             tags: <a href="/tag/{{ t.id }}/">{{ t.tag }}</a><br>
         {% endfor %}

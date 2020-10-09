@@ -10,64 +10,90 @@
     <div style="background: {{ artist.bg_color }}">
 
         <h1><em>{{ artist.monikr }}</em></h1><br>
-        <h6 style="text-align: center">{{ artist.artist_statement }}</h6>
+        <h6 style="text-align: center;color: {{ artist.as_color }}">{{ artist.artist_statement }}</h6>
         <div class="row">
             <div class="column">
-                <img src="http://res.cloudinary.com/dvviaroqm/image/upload/c_thumb,w_200,c_fill,ar_1:1,g_auto,r_max/v1601598968/{{ icon.image }}.png" alt="" style="height:190px"><br>
+                <img src="http://res.cloudinary.com/dvviaroqm/image/upload/c_thumb,w_200,c_fill,ar_1:1,g_auto,r_max/v1601598968/{{ icon.image }}.png"
+                     alt="" style="height:190px"><br>
                 {{ artist.pronouns }}<br>
                 {{ artist.medium }}<br>
                 <a href="salon">{{ artist.monikr }}'s salon</a>
             </div>
             <div class="column">
+
                 {% for e in text_exhibit %}
                     <a href="../../text_exhibit/{{ e.id }}"><strong>{{ e.title }}</strong></a><br>
                     {{ e.content }}<br>
                 {% endfor %}
 
                 {% for p in photo_exhibit %}
-
                     <a href="../../photo_exhibit/{{ p.id }}"><strong>{{ p.title }}</strong><br>
                         <img style="height:50%; width:50%;" src="{{ p.image.url }}" alt="uploaded image"></a><br>
                 {% empty %}
                     <p style="text-align:center;margin-left:auto; margin-right:auto;">
-
                 {% endfor %}
+
             </div>
-            <div class="column">
+            <div class="column" style="text-align: center">
                 <h5>contact:</h5>
                 {% for e in contact %}
-                    {{ e.website }}
-                {% endfor %}
-                <h5>commission: </h5>
+                    {% if e.website %}
+                        <a href="{{ e.website }}">website</a> |
+                    {% endif %}
+                    {% if e.email_address %}
+                        <a href="{{ e.email_address }}">email</a> |
+                    {% endif %}
+                    {% if e.instagram %}
+                        <a href="{{ e.instagram }}">instagram</a> |
+                    {% endif %}
+                    {% if e.store %}
+                        <a href="{{ e.store }}">store</a>
+                    {% endif %}
+                    {% if e.facebook %}
+                        | <a href="{{ e.facebook }}">facebook</a>
+                    {% endif %}
+                    {% if e.twitter %}
+                        | <a href="{{ e.twitter }}">twitter</a>
+                    {% endif %}
+                    {% if e.etsy %}
+                        | <a href="{{ e.etsy }}">etsy</a>
+                    {% endif %}
+                    {% if e.other %}
+                        | <a href="{{ e.other }}">other</a>
+                    {% endif %}
+                {% endfor %}<br>
                 {% for e in commission %}
+                    <h5>commission: </h5>
                     taking commissions?
                     {% if e.isOpened == False %}
-                    not right now<br>
+                        not right now<br>
                     {% else %}
-                    yes!<br>
+                        yes!<br>
                     {% endif %}
                     {% if e.disclaimer %}
-                    commission disclaimer: {{ e.disclaimer }} <br>
+                        commission disclaimer: {{ e.disclaimer }} <br>
                     {% endif %}
-                {% endfor %}
+                {% endfor %}<br><br>
                 {% for u in user %}
                     {% if currentUser.username == u.username %}
-                        <a href="commission/{{ artist.id }}/update">update commissions</a><br>
 
-                        <a href="update/">edit profile</a><br>
+                        <a href="update/">edit profile</a> |
                         <a href="contact/{{ artist.id }}/update">update contact</a> |
+                        <a href="commission/{{ artist.id }}/update">update commissions</a><br>
                         <a href="../../text_exhibit/create/">upload a text post</a> |
-                        <a href="../../photo_exhibit/upload/">upload a photo</a> | <a href="/icon/upload/">upload icon</a><br><br>
-                        <i class="material-icons">delete_forever</i></button><a href="/artist/{{ artist.id }}/delete" >delete profile </a>
+                        <a href="../../photo_exhibit/upload/">upload a photo</a> |
+                        <a href="/icon/upload/">upload icon</a><br><br>
+                        <i class="material-icons">delete_forever</i></button>
+                        <a href="/artist/{{ artist.id }}/delete">delete profile </a>
 
                     {% endif %}
                 {% endfor %}
             </div>
         </div>
-            {% if not photo_exhibit and not text_exhibit %}
-        <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
+        {% if not photo_exhibit and not text_exhibit %}
+            <h4> {{ artist.monikr }} has not yet uploaded any of their art up. try again next time 😊 </h4>
 
-            {% endif %}
+        {% endif %}
 
     </div>
 {% endblock %}

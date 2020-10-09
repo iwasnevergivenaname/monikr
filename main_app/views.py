@@ -34,7 +34,7 @@ from .forms import PhotoForm, PhotoDirectForm, PhotoUnsignedDirectForm, IconForm
 # ARTIST CRUD
 class ArtistCreate(CreateView):
 	model = Artist
-	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'iconphoto', 'bg_color']
+	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'bg_color', 'as_color']
 	success_url = '/artist'
 	
 	def form_valid(self, form):
@@ -46,7 +46,7 @@ class ArtistCreate(CreateView):
 
 class ArtistUpdate(UpdateView):
 	model = Artist
-	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'iconphoto', 'bg_color']
+	fields = ['monikr', 'pronouns', 'medium', 'artist_statement', 'bg_color', 'as_color']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -63,7 +63,7 @@ class ArtistDelete(DeleteView):
 #   EXHIBIT CRUD
 class TextExhibitCreate(CreateView):
 	model = TextExhibit
-	fields = ['title', 'content', 'materials_used', 'for_sale', 'tags']
+	fields = ['title', 'content', 'materials_used', 'link', 'link_title', 'for_sale', 'tags']
 	success_url = '/exhibit'
 	
 	def form_valid(self, form):
@@ -75,7 +75,7 @@ class TextExhibitCreate(CreateView):
 
 class TextExhibitUpdate(UpdateView):
 	model = TextExhibit
-	fields = ['title', 'content', 'materials_used', 'for_sale', 'tags']
+	fields = ['title', 'content', 'materials_used', 'link', 'link_title', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -90,7 +90,7 @@ class TextExhibitDelete(DeleteView):
 
 class PhotoExhibitUpdate(UpdateView):
 	model = PhotoExhibit
-	fields = ['title', 'description', 'materials_used', 'for_sale', 'tags']
+	fields = ['title', 'description', 'materials_used', 'link', 'link_title', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -243,15 +243,10 @@ def about(request):
 
 def artist_index(request):
 	artists = Artist.objects.all()
-	# id = artists
-	# print(id)
-	# icon = Icon.objects.get(artist=artists[id])
-	# print('!!!!!!!!!')
-	# print(icon.image.url)
-	# for i in icon:
-	# 	print('???????')
-	# 	print(i)
-	return render(request, 'artists/index.html', {'artists': artists})
+	icon = Icon.objects.all()
+	for i in icon:
+		print(i.artist)
+	return render(request, 'artists/index.html', {'artists': artists, 'icon': icon})
 
 
 # def search(TemplateView):
@@ -284,8 +279,7 @@ def page(request, pk):
 	commission = Commission.objects.filter(artist=artist)
 	return render(request, 'artists/page.html',
 	              {'artist': artist, 'text_exhibit': text_exhibit, 'photo_exhibit': photo_exhibit,
-	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser
-		              , 'icon': icon
+	               'contact': contact, 'commission': commission, 'user': user, 'currentUser': currentUser, 'icon': icon
 	               })
 
 

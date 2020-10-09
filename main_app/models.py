@@ -17,8 +17,8 @@ class Artist(models.Model):
     pronouns = models.CharField(max_length=50, blank=True)
     medium = models.CharField(max_length=50)
     artist_statement = models.CharField(max_length=250)
-    iconphoto =  models.CharField(max_length=250, default='upload icon')
     bg_color = models.CharField(max_length=50, default='white')
+    as_color = models.CharField(max_length=50, default='black')
  
     # icon =
     # category =
@@ -38,8 +38,8 @@ class Contact(models.Model):
         on_delete=models.CASCADE,
         primary_key=True,
     )
-    # email = User.email
-    phone_number = models.IntegerField(default=None, blank=True)
+    email_address = models.CharField(max_length=100, blank=True)
+    # phone_number = models.IntegerField(blank=True)
     website = models.CharField(max_length=50, blank=True)
     store = models.CharField(max_length=50, blank=True)
     instagram = models.CharField(max_length=50, blank=True)
@@ -67,9 +67,12 @@ class Commission(models.Model):
 
 class TextExhibit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100, default='title')
+    create_time = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=250, default='title')
     content = models.TextField(max_length=1000, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
+    link = models.CharField(max_length=100, blank=True)
+    link_title = models.CharField(max_length=100, blank=True)
     for_sale = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
 
@@ -81,9 +84,11 @@ class PhotoExhibit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     ## Misc Django Fields
     create_time = models.DateTimeField(auto_now_add=True)
-    title = models.CharField("Title (optional)", max_length=200, blank=True)
-    description = models.CharField(max_length=100, default='write it out here')
+    title = models.CharField("Title (optional)", max_length=250, blank=True)
+    description = models.TextField(max_length=1000, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
+    link = models.CharField(max_length=100, blank=True)
+    link_title = models.CharField(max_length=100, blank=True)
     for_sale = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
 

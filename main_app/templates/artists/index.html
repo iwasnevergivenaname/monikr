@@ -12,12 +12,17 @@
     {% for artist in artists %}
         <ul class="collection">
             <li class="collection-item avatar">
-{#                <img src="{{ artist.iconphoto }}" alt="" class="circle">#}
+                {% for i in icon %}
+                    {% if i.artist == artist.monikr %}
+                        <img src="{{ i.image.url }}" alt="" class="circle">
+                    {% endif %}
+                {% endfor %}
                 <span class="title"> <a href='/artist/{{ artist.id }}'>
-        <p>Name: {{ artist.monikr }}</p>
+        <p>monikr: {{ artist.monikr }}</p>
         </a></span>
                 <p>{{ artist.pronouns }}<br>
-                    {{ artist.artist_statement }}
+                    {{ artist.artist_statement }}<br>
+                    {{ artist.medium }}<br>
 
                 </p>
                 {#        <a href="#!" class="secondary-content"><i class="material-icons">grade</i></a>#}

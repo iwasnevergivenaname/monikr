@@ -9,19 +9,19 @@
         <p><a href="{{ text_exhibit.link }}">{{ text_exhibit.link_title }}</a></p>
         <h5>materials used: {{ text_exhibit.materials_used }}</h5><br>
         <p>{{ text_exhibit.create_time }}</p>
-         {% for t in tags %}
+        {% for t in tags %}
             tags: <a href="/tag/{{ t.id }}/">{{ t.tag }}</a><br>
         {% endfor %}
     {% elif photo_exhibit %}
 
         <h2><a href="/artist/{{ photo_exhibit.artist.id }}">{{ photo_exhibit.artist }}:</a> {{ photo_exhibit.title }}
         </h2>
-
+        <a href="{{ photo_exhibit.link }}">
         <img style="height: 90%; width: 90%; display:block; margin-left:auto; margin-right:auto;"
              src="{{ photo_exhibit.image.url }}"
-             alt="uploaded image"><br>
+             alt="uploaded image"></a><br>
         <p>description: {{ photo_exhibit.description }}</p>
-        <p><a href="{{ photo_exhibit.link }}">{{ photo_exhibit.link_title }}</a></p>
+
         <p>materials used: {{ photo_exhibit.materials_used }}</p>
         <p>{{ photo_exhibit.create_time }}</p>
         {% for t in tags %}

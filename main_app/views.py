@@ -90,7 +90,7 @@ class TextExhibitDelete(DeleteView):
 
 class PhotoExhibitUpdate(UpdateView):
 	model = PhotoExhibit
-	fields = ['title', 'description', 'materials_used', 'link', 'link_title', 'for_sale', 'tags']
+	fields = ['title', 'description', 'materials_used', 'link', 'for_sale', 'tags']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)

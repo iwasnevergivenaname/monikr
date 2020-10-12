@@ -95,7 +95,6 @@ class PhotoExhibit(models.Model):
     description = models.TextField(max_length=1000, default='write it out here')
     materials_used = models.CharField(max_length=100, default='materials')
     link = models.CharField(max_length=100, blank=True)
-    link_title = models.CharField(max_length=100, blank=True)
     for_sale = models.BooleanField(default=False)
     tags = models.ManyToManyField(Tag)
 

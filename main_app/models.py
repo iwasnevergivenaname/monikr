@@ -41,12 +41,19 @@ class Contact(models.Model):
     email_address = models.CharField(max_length=100, blank=True)
     # phone_number = models.IntegerField(blank=True)
     website = models.CharField(max_length=50, blank=True)
+    spotify = models.CharField(max_length=50, blank=True)
     store = models.CharField(max_length=50, blank=True)
     instagram = models.CharField(max_length=50, blank=True)
     facebook = models.CharField(max_length=50, blank=True)
     twitter = models.CharField(max_length=50, blank=True)
+    bandcamp = models.CharField(max_length=50, blank=True)
+    medium = models.CharField(max_length=50, blank=True)
+    soundcloud = models.CharField(max_length=50, blank=True)
     etsy = models.CharField(max_length=50, blank=True)
     other = models.CharField(max_length=50, blank=True)
+    other_description = models.CharField(max_length=50, blank=True)
+    other_two = models.CharField(max_length=50, blank=True)
+    other_two_description = models.CharField(max_length=50, blank=True)
 
     def __str__(self):
         return self.website

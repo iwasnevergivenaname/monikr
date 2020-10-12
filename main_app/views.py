@@ -100,7 +100,7 @@ class PhotoExhibitUpdate(UpdateView):
 
 class PhotoExhibitDelete(DeleteView):
 	model = PhotoExhibit
-	success_url = ''
+	success_url = '/artist/'
 
 
 # COMMISSION CRUD
@@ -134,7 +134,8 @@ class CommissionDelete(DeleteView):
 # CONTACT CRUD
 class ContactCreate(CreateView):
 	model = Contact
-	fields = ['phone_number', 'website', 'store', 'instagram', 'facebook', 'twitter', 'etsy', 'other']
+	fields = ['email_address', 'website', 'spotify', 'store', 'instagram', 'facebook', 'twitter', 'bandcamp', 'medium', 'etsy', 'other',
+	          'other_description', 'other_two', 'other_two_description']
 	success_url = '/artist'
 	
 	def form_valid(self, form):
@@ -146,7 +147,8 @@ class ContactCreate(CreateView):
 
 class ContactUpdate(UpdateView):
 	model = Contact
-	fields = ['phone_number', 'website', 'store', 'instagram', 'facebook', 'twitter', 'etsy', 'other']
+	fields = ['email_address', 'website', 'spotify', 'store', 'instagram', 'facebook', 'twitter', 'bandcamp', 'medium', 'etsy', 'other',
+	          'other_description', 'other_two', 'other_two_description']
 	
 	def form_valid(self, form):
 		self.object = form.save(commit=False)
@@ -162,7 +164,6 @@ class ContactDelete(DeleteView):
 # SEARCH PAGE AND RESULTS
 class HomePageView(TemplateView):
 	template_name = 'search.html'
-
 
 
 class SearchResultsView(ListView):
@@ -293,7 +294,8 @@ def text_exhibit(request, pk):
 	except Exception as e:
 		print(f"text exhibit error {e}")
 		currentUser = None
-	return render(request, 'artists/exhibit.html', {'text_exhibit': text_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
+	return render(request, 'artists/exhibit.html',
+	              {'text_exhibit': text_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
 
 
 def photo_exhibit(request, pk):
@@ -306,7 +308,8 @@ def photo_exhibit(request, pk):
 	except Exception as e:
 		print(f"photo exhibit error {e}")
 		currentUser = None
-	return render(request, 'artists/exhibit.html', {'photo_exhibit': photo_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
+	return render(request, 'artists/exhibit.html',
+	              {'photo_exhibit': photo_exhibit, 'artist': artist, 'currentUser': currentUser, 'tags': tags})
 
 
 # UPLOAD
@@ -338,9 +341,9 @@ def upload(request):
 		# Only backend upload should be posting here
 		form = PhotoForm(request.POST, request.FILES)
 		context['posted'] = form.instance
-		#print(form)
+		# print(form)
 		if form.is_valid():
-			print (form.cleaned_data)
+			print(form.cleaned_data)
 			# Uploads image and creates a model instance for it
 			form.save()
 	return render(request, 'upload.html', context)
@@ -403,6 +406,7 @@ def icon_direct_upload_complete(request):
 	
 	return HttpResponse(json.dumps(ret), content_type='application/json')
 
+
 #  TAGS
 def tags_index(request):
 	tags = Tag.objects.all()
@@ -413,7 +417,8 @@ def tags_show(request, id):
 	tag = Tag.objects.get(id=id)
 	photo_exhibit = PhotoExhibit.objects.filter(tags=tag)
 	text_exhibit = TextExhibit.objects.filter(tags=tag)
-	return render(request, 'tags/show.html', {'tags': tag, 'id': id, 'photo_exhibit': photo_exhibit, 'text_exhibit': text_exhibit})
+	return render(request, 'tags/show.html',
+	              {'tags': tag, 'id': id, 'photo_exhibit': photo_exhibit, 'text_exhibit': text_exhibit})
 
 
 #  salon
@@ -475,5 +480,6 @@ def logout(request):
 	auth.logout(request)
 	return render(request, 'index.html')
 
+
 def error404(request, path):
-    return render(request, '500.html', status=500)
+	return render(request, '500.html', status=500)

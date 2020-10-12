@@ -13,7 +13,7 @@
         <h6 style="text-align: center;color: {{ artist.as_color }}">{{ artist.artist_statement }}</h6>
         <div class="row">
             <div class="column">
-                <img src="http://res.cloudinary.com/dvviaroqm/image/upload/c_thumb,w_200,c_fill,ar_1:1,g_auto,r_max/v1601598968/{{ icon.image }}.png"
+                <img src="http://res.cloudinary.com/dvviaroqm/image/upload/c_thumb,w_200,c_fill,ar_1:1,g_face,r_max/v1601598968/{{ icon.image }}.png"
                      alt="" style="height:190px"><br>
                 {{ artist.pronouns }}<br>
                 {{ artist.medium }}<br>
@@ -37,29 +37,44 @@
             <div class="column" style="text-align: center">
                 <h5>contact:</h5>
                 {% for e in contact %}
-                    {% if e.website %}
-                        <a href="{{ e.website }}">website</a> |
-                    {% endif %}
                     {% if e.email_address %}
-                        <a href="{{ e.email_address }}">email</a> |
+                        💌<a href="{{ e.email_address }}">email</a>💌<br>
+                    {% endif %}
+                    {% if e.website %}
+                        ✨<a href="{{ e.website }}">website</a>✨<br>
+                    {% endif %}
+                    {% if e.spotify %}
+                        🎶<a href="{{ e.spotify }}">spotify</a>🎶<br>
                     {% endif %}
                     {% if e.instagram %}
-                        <a href="{{ e.instagram }}">instagram</a> |
+                        📸<a href="{{ e.instagram }}">instagram</a>📸<br>
                     {% endif %}
                     {% if e.store %}
-                        <a href="{{ e.store }}">store</a>
+                        🛒<a href="{{ e.store }}">store</a>🛒<br>
                     {% endif %}
                     {% if e.facebook %}
-                        | <a href="{{ e.facebook }}">facebook</a>
+                        👤<a href="{{ e.facebook }}">facebook</a>👤<br>
                     {% endif %}
                     {% if e.twitter %}
-                        | <a href="{{ e.twitter }}">twitter</a>
+                        🦜<a href="{{ e.twitter }}">twitter</a>🦜<br>
+                    {% endif %}
+                    {% if e.medium %}
+                        ✍🏽<a href="{{ e.medium }}">medium</a>✍🏽<br>
+                    {% endif %}
+                    {% if e.bandcamp %}
+                        🎧<a href="{{ e.bandcamp }}">bandcamp</a>🎧<br>
+                    {% endif %}
+                    {% if e.soundcloud %}
+                        🎵<a href="{{ e.soundcloud }}">soundcloud</a>🎵<br>
                     {% endif %}
                     {% if e.etsy %}
-                        | <a href="{{ e.etsy }}">etsy</a>
+                        ⛓<a href="{{ e.etsy }}">etsy</a>⛓<br>
                     {% endif %}
                     {% if e.other %}
-                        | <a href="{{ e.other }}">other</a>
+                        <a href="{{ e.other }}">{{ e.other_descriptionr }}</a><br>
+                    {% endif %}
+                    {% if e.other_two %}
+                        <a href="{{ e.other_two }}">{{ e.other_two_descriptionr }}</a><br>
                     {% endif %}
                 {% endfor %}<br>
                 {% for e in commission %}
